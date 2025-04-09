@@ -34,13 +34,13 @@ const Landing = () => {
   const [countryCount, setCountryCount] = useState(187);
   const { toast } = useToast();
   const [isExpanded, setIsExpanded] = useState(true);
-  const [glitchText, setGlitchText] = useState("SECVRITY.BRVTALISM");
+  const [glitchText, setGlitchText] = useState("SECVRITY.P0RT4L");
   const rssTickerRef = useRef<HTMLDivElement>(null);
 
   useEffect(() => {
     const intervalId = setInterval(() => {
       if (Math.random() > 0.8) {
-        const corruptedText = "SECVRITY.BRVTALISM".split('')
+        const corruptedText = "SECVRITY.P0RT4L".split('')
           .map(char => {
             if (Math.random() > 0.7) {
               const chars = "ABCDEFGHIJKLMNOPQRSTUVWXYZ0123456789".split('');
@@ -52,7 +52,7 @@ const Landing = () => {
         setGlitchText(corruptedText);
         
         setTimeout(() => {
-          setGlitchText("SECVRITY.BRVTALISM");
+          setGlitchText("SECVRITY.P0RT4L");
         }, 200);
       }
     }, 2000);
@@ -393,7 +393,7 @@ const Landing = () => {
 
       <footer className="container mx-auto py-6 border-t-4 border-black text-center">
         <p className="text-sm text-black font-bold">
-          © 2024 SECVRITY.BRVTALISM | BRUTALIST CYBERPUNK RED TEAMING PLATFORM
+          © 2024 SECVRITY.P0RT4L | BRUTALIST CYBERPUNK RED TEAMING PLATFORM
         </p>
         <p className="text-xs text-black mt-2">
           SYSTEM STATUS: {isOnline ? "ONLINE" : "OFFLINE"} | 
