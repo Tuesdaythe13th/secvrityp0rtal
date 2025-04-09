@@ -1,4 +1,3 @@
-
 import React, { useEffect } from 'react';
 
 const NeonCryptoHeist = () => {
@@ -201,13 +200,12 @@ const NeonCryptoHeist = () => {
     function hackKeyholder(target: string) {
       const buttonId = `hack-${target.toLowerCase()}`;
       const keyId = `key-${['CEO','CTO','CFO','AUDITOR','SECURITY'].indexOf(target) + 1}`;
-      const button = document.getElementById(buttonId);
+      const button = document.getElementById(buttonId) as HTMLButtonElement;
       
-      if (!button) return;
-      
-      // Disable button during hack
-      button.disabled = true;
-      button.classList.add('hack-animation');
+      if (button) {
+        button.disabled = true;
+        button.classList.add('hack-animation');
+      }
       
       addTerminalOutput(`> Initiating hack against ${target}'s credentials...`);
       
@@ -227,7 +225,7 @@ const NeonCryptoHeist = () => {
       }, 200);
     }
     
-    function completeHack(target: string, keyId: string, button: HTMLElement) {
+    function completeHack(target: string, keyId: string, button: HTMLButtonElement) {
       // 70% chance of success
       const success = Math.random() > 0.3;
       
@@ -306,8 +304,10 @@ const NeonCryptoHeist = () => {
       
       // Re-enable button after delay
       setTimeout(() => {
-        button.disabled = false;
-        button.classList.remove('hack-animation');
+        if (button) {
+          button.disabled = false;
+          button.classList.remove('hack-animation');
+        }
       }, 3000);
     }
     

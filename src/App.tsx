@@ -8,6 +8,7 @@ import Index from "./pages/Index";
 import Landing from "./pages/Landing";
 import NotFound from "./pages/NotFound";
 import NeonCryptoHeist from "./pages/NeonCryptoHeist";
+import PromptInjectionDojo from "./pages/PromptInjectionDojo";
 
 const queryClient = new QueryClient();
 
@@ -21,6 +22,7 @@ const App = () => (
           <Route path="/" element={<Landing />} />
           <Route path="/simulator" element={<Index />} />
           <Route path="/neon-crypto-heist" element={<NeonCryptoHeist />} />
+          <Route path="/prompt-injection-dojo" element={<PromptInjectionDojo />} />
           {/* ADD ALL CUSTOM ROUTES ABOVE THE CATCH-ALL "*" ROUTE */}
           <Route path="*" element={<NotFound />} />
         </Routes>

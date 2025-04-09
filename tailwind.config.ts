@@ -29,6 +29,7 @@ export default {
 				neonPink: '#ff00aa',
 				darkBg: '#0a0a0a',
 				cyberBlue: '#0FA0CE',
+				promptRed: '#ff5555',
 				primary: {
 					DEFAULT: 'hsl(var(--primary))',
 					foreground: 'hsl(var(--primary-foreground))'
@@ -57,6 +58,11 @@ export default {
 					DEFAULT: 'hsl(var(--card))',
 					foreground: 'hsl(var(--card-foreground))'
 				}
+			},
+			fontFamily: {
+				'cyber': ['VT323', 'monospace'],
+				'share-tech': ['Share Tech Mono', 'monospace'],
+				'ibm': ['IBM Plex Mono', 'monospace'],
 			},
 			borderRadius: {
 				lg: 'var(--radius)',

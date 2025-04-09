@@ -1,4 +1,3 @@
-
 import { motion } from 'framer-motion';
 import { Link } from 'react-router-dom';
 import { useToast } from '@/hooks/use-toast';
@@ -350,7 +349,6 @@ const Landing = () => {
           </div>
         </motion.div>
         
-        {/* New Neon Crypto Heist Section */}
         <motion.div 
           variants={itemVariants}
           className="border border-cyan-500 bg-black bg-opacity-80 p-6 mb-8"
@@ -387,6 +385,45 @@ const Landing = () => {
               whileTap={{ scale: 0.95 }}
             >
               VIEW LOOT STATS
+            </motion.button>
+          </div>
+        </motion.div>
+        
+        <motion.div 
+          variants={itemVariants}
+          className="brutal-border bg-black bg-opacity-80 p-6 mb-8"
+          style={{ 
+            borderColor: '#ff5555',
+            boxShadow: '8px 8px 0 #ff0000' 
+          }}
+        >
+          <motion.h3 
+            className="text-2xl mb-2 ibm-font"
+            style={{ 
+              color: '#ff5555', 
+              textShadow: '0 0 5px #ff5555, 0 0 10px #ff5555' 
+            }}
+          >
+            PROMPT INJECTION DOJO
+          </motion.h3>
+          <p className="text-gray-300 mb-4">BRUTAL RED TEAM TRAINING SIMULATOR. BYPASS AI CONTENT FILTERS.</p>
+          
+          <div className="flex flex-col sm:flex-row gap-4">
+            <motion.button
+              className="brutal-btn font-bold"
+              whileHover={{ scale: 1.05, backgroundColor: "#ff0000" }}
+              whileTap={{ scale: 0.95 }}
+            >
+              <Link to="/prompt-injection-dojo">ENTER DOJO</Link>
+            </motion.button>
+            
+            <motion.button
+              className="border border-red-500 text-red-500 px-8 py-3 font-bold"
+              whileHover={{ scale: 1.05 }}
+              whileTap={{ scale: 0.95 }}
+              style={{ borderColor: '#ff5555' }}
+            >
+              ADVANCED TECHNIQUES
             </motion.button>
           </div>
         </motion.div>
