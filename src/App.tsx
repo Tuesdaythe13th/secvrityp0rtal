@@ -17,6 +17,7 @@ import VDPGenerator from "./pages/VDPGenerator";
 import CloudSecurityTable from "./pages/CloudSecurityTable";
 import CriticalAISecurityGuide from "./pages/CriticalAISecurityGuide";
 import InsiderTaxonomy from "./pages/InsiderTaxonomy";
+import AdversarialTaxonomy from "./pages/AdversarialTaxonomy";
 
 // Create a new QueryClient instance
 const queryClient = new QueryClient();
@@ -41,6 +42,7 @@ const App = () => {
           <Route path="/cloud-security-table" element={<CloudSecurityTable />} />
           <Route path="/critical-ai-security" element={<CriticalAISecurityGuide />} />
           <Route path="/insider-taxonomy" element={<InsiderTaxonomy />} />
+          <Route path="/adversarial-taxonomy" element={<AdversarialTaxonomy />} />
           {/* ADD ALL CUSTOM ROUTES ABOVE THE CATCH-ALL "*" ROUTE */}
           <Route path="*" element={<NotFound />} />
         </Routes>

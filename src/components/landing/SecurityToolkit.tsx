@@ -1,3 +1,4 @@
+
 import { motion } from "framer-motion";
 import { Link } from "react-router-dom";
 import { ChevronDown, ChevronUp } from "lucide-react";
@@ -111,13 +112,13 @@ const SecurityToolkit = ({ isExpanded, setIsExpanded }: SecurityToolkitProps) =>
               <div className="font-bold">VDP GENERATOR</div>
             </Link>
             
-            <div className="bg-black text-white p-4 text-center border-2 border-black hover:bg-white hover:text-black transition-colors duration-300">
+            <Link to="/insider-taxonomy" className="block bg-black text-white p-4 text-center border-2 border-black hover:bg-white hover:text-black transition-colors duration-300">
               <div className="font-bold">INSIDER THREAT</div>
-            </div>
+            </Link>
             
-            <div className="bg-white text-black p-4 text-center border-2 border-black hover:bg-black hover:text-white transition-colors duration-300">
-              <div className="font-bold">CLOUD SECURITY</div>
-            </div>
+            <Link to="/adversarial-taxonomy" className="block bg-white text-black p-4 text-center border-2 border-black hover:bg-black hover:text-white transition-colors duration-300">
+              <div className="font-bold">ADVERSARIAL TAXONOMY</div>
+            </Link>
             
             <Link to="/security-audit" className="block bg-black text-white p-4 text-center border-2 border-black hover:bg-white hover:text-black transition-colors duration-300">
               <div className="font-bold">SECURITY AUDIT</div>
