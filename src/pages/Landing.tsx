@@ -1,3 +1,4 @@
+
 import { motion } from "framer-motion";
 import { Link } from "react-router-dom";
 import { Button } from "@/components/ui/button";
@@ -37,6 +38,7 @@ const Landing = () => {
   const [isExpanded, setIsExpanded] = useState(true);
   const [glitchText, setGlitchText] = useState("SECVRITY.BRVTALISM");
   const rssTickerRef = useRef<HTMLDivElement>(null);
+  const cyberMapRef = useRef<HTMLDivElement>(null);
 
   useEffect(() => {
     const intervalId = setInterval(() => {
@@ -111,6 +113,155 @@ const Landing = () => {
     
     return () => {
       const scripts = document.querySelectorAll('script[src="https://widget.rss.app/v1/ticker.js"]');
+      scripts.forEach(script => script.remove());
+    };
+  }, []);
+
+  // Add Kaspersky Cyberthreat map
+  useEffect(() => {
+    if (cyberMapRef.current) {
+      cyberMapRef.current.innerHTML = '';
+      
+      // Add required CSS
+      const linkElement = document.createElement('link');
+      linkElement.rel = 'stylesheet';
+      linkElement.type = 'text/css';
+      linkElement.href = 'https://cybermap.kaspersky.com/css/widget-dynamic.css?id=aecb03a62887f01fb45aae052512d0d0';
+      document.head.appendChild(linkElement);
+      
+      // Create elements for the Kaspersky map
+      const headerDiv = document.createElement('div');
+      headerDiv.className = 'header';
+      
+      const h1Element = document.createElement('h1');
+      h1Element.id = 'header_main_title';
+      h1Element.innerHTML = '<b>CYBERTHREAT</b> LIVE MAP';
+      headerDiv.appendChild(h1Element);
+      
+      const canvasWrapper = document.createElement('div');
+      canvasWrapper.className = 'webgl-canvas-wrapper';
+      
+      const canvas = document.createElement('canvas');
+      canvas.id = 'webgl-canvas';
+      canvasWrapper.appendChild(canvas);
+      
+      const detectionTypesContainer = document.createElement('div');
+      detectionTypesContainer.id = 'detection_types_container';
+      
+      // Append all elements to the container
+      cyberMapRef.current.appendChild(headerDiv);
+      cyberMapRef.current.appendChild(canvasWrapper);
+      cyberMapRef.current.appendChild(detectionTypesContainer);
+      
+      // Add required scripts
+      const geoIpScript = document.createElement('script');
+      geoIpScript.type = 'text/javascript';
+      geoIpScript.innerHTML = `
+        window.geoIP = {
+          country: "US",
+          coord: [47.7385, -122.3748]
+        };
+        
+        window.feedUrl = "default";
+        window.disabledCountries = [8,64,80,109,131,161,189,243];
+        
+        window.resourceUrl = function(path) {
+          var url = String(path);
+          var withDomain = url.startsWith('http://') || url.startsWith('https://');
+          url = withDomain || url.startsWith('/') ? url : '/'.concat(url);
+          return withDomain ? url : window.location.origin + url;
+        };
+      `;
+      document.head.appendChild(geoIpScript);
+      
+      // Add the widget script
+      const widgetScript = document.createElement('script');
+      widgetScript.src = 'https://cybermap.kaspersky.com/js/widget-dynamic.js?id=84ec65f3752870b7085d533f645b3178';
+      widgetScript.async = true;
+      document.head.appendChild(widgetScript);
+      
+      // Systems configuration and initialization script
+      const mapInitScript = document.createElement('script');
+      mapInitScript.type = 'text/javascript';
+      mapInitScript.innerHTML = `
+        var map_systems = [
+          {id: 1, shortname: "OAS", name: "On-Access Scan", description: "OAS (On-Access Scan) shows malware detection flow during On-Access Scan, i.e. when objects are accessed during open, copy, run or save operations.", color: "38b349", edges: 5},
+          {id: 2, shortname: "ODS", name: "On-Demand Scan", description: "ODS (On Demand Scanner) shows malware detection flow during On-Demand Scan, when the user manually selects the 'Scan for viruses' option in the context menu.", color: "ed1c24", edges: 4},
+          {id: 3, shortname: "MAV", name: "Mail Anti Virus", description: "MAV (Mail Anti-Virus) shows malware detection flow during Mail Anti-Virus scan when new objects appear in an email application (Outlook, The Bat, Thunderbird). The MAV scans incoming messages and calls OAS when saving attachments to a disk.", color: "f26522", edges: 3},
+          {id: 4, shortname: "WAV", name: "Web Anti-Virus", description: "WAV (Web Anti-Virus) shows malware detection flow during Web Anti-Virus scan when the html page of a website opens or a file is downloads. It checks the ports specified in the Web Anti-Virus settings.", color: "0087f4", edges: 32},
+          {id: 5, shortname: "IDS", name: "Intrusion Detection Scan", description: "IDS (Intrusion Detection System) shows network attacks detection flow.", color: "ec008c", edges: 6},
+          {id: 6, shortname: "VUL", name: "Vulnerability Scan", description: "VUL (Vulnerability Scan) shows vulnerability detection flow.", color: "fbf267", edges: 8},
+          {id: 7, shortname: "KAS", name: "Kaspersky Anti-Spam", description: "KAS (Kaspersky Anti-Spam) shows suspicious and unwanted email traffic discovered by Kaspersky's Reputation Filtering technology.", color: "855ff4", edges: -16},
+          {id: 8, shortname: "BAD", name: "Botnet Activity Detection", description: "BAD (Botnet Activity Detection) shows statistics on identified IP-addresses of DDoS-attacks victims and botnet C&amp;C servers. These statistics were acquired with the help of the DDoS Intelligence system (part of the solution Kaspersky DDoS Protection).", color: "00d1a9", edges: 31},
+          {id: 9, shortname: "RMW", name: "Ransomware", description: "RMW (Ransomware) shows ransomware detection flow.", color: "0000ff", edges: 9}
+        ];
+        
+        $(function () {
+          function dummy() {}
+          var MAP_functions = {
+            show_country_popup: dummy,
+            hide_country_popup: dummy,
+            set_demo_state: dummy,
+            got_geoip_data: dummy
+          };
+          
+          var mapFile = "data/map.json";
+          var labelsFile = "data/labels.json";
+          
+          if (typeof MAP !== 'undefined') {
+            // Initialize and start the map component
+            MAP.init({
+              functions: MAP_functions,
+              quality: 'medium',
+              widget: true,
+              systems: map_systems,
+              showMapLabels: true,
+              showCountryPops: true,
+              demoEnabled: false,
+              demoFlightEnabled: false,
+              allowInteraction: true,
+              startCountry: 'auto',
+              startFromSelectedCountry: 'false',
+              showSubsystemPopup: 'false',
+              showCountryPopup: 'false',
+              mapFile: mapFile,
+              labelsFile: labelsFile
+            });
+            
+            $(document).ready(function () {
+              if (typeof DetectionTypeCarousel !== 'undefined') {
+                var carousel = new DetectionTypeCarousel(
+                  $("#detection_types_container"),
+                  map_systems,
+                  null,
+                  [MAP.toggle_map, MAP.toggle_graph]
+                );
+                
+                MAP.attachUpdateEventsCallback(carousel.UpdateCounters);
+                MAP.updateCountryStats(function (country, rank, systems) {});
+                MAP.showCountryPopup(function () {});
+                MAP.countrySelect(function (country) {});
+              }
+            });
+          }
+        });
+      `;
+      
+      // Add jQuery dependency
+      const jQueryScript = document.createElement('script');
+      jQueryScript.src = 'https://code.jquery.com/jquery-3.6.0.min.js';
+      jQueryScript.onload = () => {
+        document.head.appendChild(mapInitScript);
+      };
+      document.head.appendChild(jQueryScript);
+    }
+    
+    return () => {
+      // Cleanup
+      const cssLinks = document.querySelectorAll('link[href*="cybermap.kaspersky.com"]');
+      cssLinks.forEach(link => link.remove());
+      
+      const scripts = document.querySelectorAll('script[src*="cybermap.kaspersky.com"]');
       scripts.forEach(script => script.remove());
     };
   }, []);
@@ -220,11 +371,8 @@ const Landing = () => {
 
         <div className="mb-4">
           <div className="uppercase text-xs font-bold mb-2">GLOBAL CYBER THREAT MAP</div>
-          <div className="h-64 bg-white border-2 border-black flex items-center justify-center">
-            <div className="text-center">
-              <div className="text-xl mb-2 font-bold">CYBERTHREAT LIVE MAP</div>
-              <div className="text-xs">Powered by kaspersky</div>
-            </div>
+          <div ref={cyberMapRef} className="h-96 bg-white border-2 border-black relative overflow-hidden">
+            {/* Kaspersky Cyberthreat map will be inserted here */}
           </div>
         </div>
 
