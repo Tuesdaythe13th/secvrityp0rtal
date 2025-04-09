@@ -1,10 +1,10 @@
-
 import { motion } from "framer-motion";
 import { Link } from "react-router-dom";
 import { Button } from "@/components/ui/button";
 import { useEffect, useState } from "react";
 import { useToast } from "@/components/ui/use-toast";
 import { FontAwesomeIcon } from "@fortawesome/react-fontawesome";
+import { ChevronDown, ChevronUp } from "lucide-react";
 import { 
   faShieldAlt, 
   faBug, 
@@ -22,6 +22,11 @@ import {
   faExchangeAlt,
   faFileCode
 } from "@fortawesome/free-solid-svg-icons";
+import {
+  Collapsible,
+  CollapsibleContent,
+  CollapsibleTrigger,
+} from "@/components/ui/collapsible";
 
 const Landing = () => {
   const [isOnline, setIsOnline] = useState(navigator.onLine);
@@ -29,6 +34,7 @@ const Landing = () => {
   const [threatCount, setThreatCount] = useState(24687);
   const [countryCount, setCountryCount] = useState(187);
   const { toast } = useToast();
+  const [isExpanded, setIsExpanded] = useState(true);
 
   useEffect(() => {
     const handleOnlineStatus = () => {
@@ -65,7 +71,6 @@ const Landing = () => {
 
   return (
     <div className="bg-white text-black min-h-screen">
-      {/* Header */}
       <header className="text-center py-6 border-b-4 border-black">
         <h1 className="text-5xl font-bold text-black">SECVRITY.BRVTALISM</h1>
         <nav className="mt-6 flex justify-center space-x-6">
@@ -78,7 +83,6 @@ const Landing = () => {
         </nav>
       </header>
 
-      {/* Security Threat Monitor */}
       <section className="container mx-auto my-6 p-4 border-4 border-black bg-white">
         <div className="flex justify-between items-center mb-2">
           <div className="flex items-center">
@@ -133,7 +137,6 @@ const Landing = () => {
         </div>
       </section>
 
-      {/* Threat Types */}
       <section className="container mx-auto my-6">
         <div className="grid grid-cols-2 md:grid-cols-3 lg:grid-cols-6 gap-1">
           {[
@@ -155,68 +158,99 @@ const Landing = () => {
         </div>
       </section>
 
-      {/* Security Tools Grid */}
       <section className="container mx-auto my-6">
-        <div className="grid grid-cols-1 md:grid-cols-2 lg:grid-cols-4 gap-4">
-          <Link to="/simulator" className="block bg-black text-white p-4 text-center border-2 border-black hover:bg-white hover:text-black transition-colors duration-300">
-            <div className="font-bold">CRITICAL AI SECURITY</div>
-          </Link>
-          
-          <Link to="/agentic-ai-101" className="block bg-white text-black p-4 text-center border-2 border-black hover:bg-black hover:text-white transition-colors duration-300">
-            <div className="font-bold">AI ATTACK TAXONOMY</div>
-          </Link>
-          
-          <div className="bg-black text-white p-4 text-center border-2 border-black hover:bg-white hover:text-black transition-colors duration-300">
-            <div className="font-bold">D3FEND GRAPH</div>
-          </div>
-          
-          <div className="bg-white text-black p-4 text-center border-2 border-black hover:bg-black hover:text-white transition-colors duration-300">
-            <div className="font-bold">VDP GENERATOR</div>
-          </div>
-          
-          <div className="bg-black text-white p-4 text-center border-2 border-black hover:bg-white hover:text-black transition-colors duration-300">
-            <div className="font-bold">INSIDER THREAT</div>
-          </div>
-          
-          <div className="bg-white text-black p-4 text-center border-2 border-black hover:bg-black hover:text-white transition-colors duration-300">
-            <div className="font-bold">CLOUD SECURITY</div>
-          </div>
-          
-          <div className="bg-black text-white p-4 text-center border-2 border-black hover:bg-white hover:text-black transition-colors duration-300">
-            <div className="font-bold">SECURITY AUDIT</div>
-          </div>
-          
-          <div className="bg-white text-black p-4 text-center border-2 border-black hover:bg-black hover:text-white transition-colors duration-300">
-            <div className="font-bold">AGENT ARCHITECTURE</div>
-          </div>
-          
-          <Link to="/agentic-ai-101" className="block bg-black text-white p-4 text-center border-2 border-black hover:bg-white hover:text-black transition-colors duration-300">
-            <div className="font-bold">AGENTIC 101</div>
-          </Link>
-          
-          <div className="bg-white text-black p-4 text-center border-2 border-black hover:bg-black hover:text-white transition-colors duration-300">
-            <div className="font-bold">BENCHMARK DIRECTORY</div>
-          </div>
-          
-          <div className="bg-black text-white p-4 text-center border-2 border-black hover:bg-white hover:text-black transition-colors duration-300">
-            <div className="font-bold">VULNERABILITY DATABASE</div>
-          </div>
-          
-          <div className="bg-white text-black p-4 text-center border-2 border-black hover:bg-black hover:text-white transition-colors duration-300">
-            <div className="font-bold">SECURE CONFERENCE</div>
-          </div>
-          
-          <Link to="/fear-greed-index" className="block bg-black text-white p-4 text-center border-2 border-black hover:bg-white hover:text-black transition-colors duration-300">
-            <div className="font-bold">FEAR AND GREED INDEX</div>
-          </Link>
-          
-          <div className="bg-white text-black p-4 text-center border-2 border-black hover:bg-black hover:text-white transition-colors duration-300">
-            <div className="font-bold">SYNTHETIC TXT DATA AUDIT</div>
-          </div>
-        </div>
+        <Collapsible
+          open={isExpanded}
+          onOpenChange={setIsExpanded}
+          className="border-4 border-black bg-white"
+        >
+          <CollapsibleTrigger className="flex justify-between items-center w-full p-4 font-bold text-lg bg-black text-white hover:bg-white hover:text-black transition-colors duration-300 border-2 border-black">
+            <motion.div
+              initial={{ opacity: 0 }}
+              animate={{ opacity: 1 }}
+              transition={{ duration: 0.5 }}
+              className="flex-1 text-left"
+            >
+              NEURAL_SECURITY::TOOLKIT
+            </motion.div>
+            <motion.div
+              animate={{ rotate: isExpanded ? 180 : 0 }}
+              transition={{ duration: 0.3 }}
+            >
+              {isExpanded ? (
+                <ChevronUp className="h-6 w-6" />
+              ) : (
+                <ChevronDown className="h-6 w-6" />
+              )}
+            </motion.div>
+          </CollapsibleTrigger>
+          <CollapsibleContent className="p-4">
+            <motion.div 
+              initial={{ opacity: 0 }}
+              animate={{ opacity: 1 }}
+              transition={{ duration: 0.3, delay: 0.1 }}
+              className="grid grid-cols-1 md:grid-cols-2 lg:grid-cols-4 gap-4"
+            >
+              <Link to="/simulator" className="block bg-black text-white p-4 text-center border-2 border-black hover:bg-white hover:text-black transition-colors duration-300">
+                <div className="font-bold">CRITICAL AI SECURITY</div>
+              </Link>
+              
+              <Link to="/agentic-ai-101" className="block bg-white text-black p-4 text-center border-2 border-black hover:bg-black hover:text-white transition-colors duration-300">
+                <div className="font-bold">AI ATTACK TAXONOMY</div>
+              </Link>
+              
+              <div className="bg-black text-white p-4 text-center border-2 border-black hover:bg-white hover:text-black transition-colors duration-300">
+                <div className="font-bold">D3FEND GRAPH</div>
+              </div>
+              
+              <div className="bg-white text-black p-4 text-center border-2 border-black hover:bg-black hover:text-white transition-colors duration-300">
+                <div className="font-bold">VDP GENERATOR</div>
+              </div>
+              
+              <div className="bg-black text-white p-4 text-center border-2 border-black hover:bg-white hover:text-black transition-colors duration-300">
+                <div className="font-bold">INSIDER THREAT</div>
+              </div>
+              
+              <div className="bg-white text-black p-4 text-center border-2 border-black hover:bg-black hover:text-white transition-colors duration-300">
+                <div className="font-bold">CLOUD SECURITY</div>
+              </div>
+              
+              <div className="bg-black text-white p-4 text-center border-2 border-black hover:bg-white hover:text-black transition-colors duration-300">
+                <div className="font-bold">SECURITY AUDIT</div>
+              </div>
+              
+              <div className="bg-white text-black p-4 text-center border-2 border-black hover:bg-white hover:text-black transition-colors duration-300">
+                <div className="font-bold">AGENT ARCHITECTURE</div>
+              </div>
+              
+              <Link to="/agentic-ai-101" className="block bg-black text-white p-4 text-center border-2 border-black hover:bg-white hover:text-black transition-colors duration-300">
+                <div className="font-bold">AGENTIC 101</div>
+              </Link>
+              
+              <div className="bg-white text-black p-4 text-center border-2 border-black hover:bg-black hover:text-white transition-colors duration-300">
+                <div className="font-bold">BENCHMARK DIRECTORY</div>
+              </div>
+              
+              <div className="bg-black text-white p-4 text-center border-2 border-black hover:bg-white hover:text-black transition-colors duration-300">
+                <div className="font-bold">VULNERABILITY DATABASE</div>
+              </div>
+              
+              <div className="bg-white text-black p-4 text-center border-2 border-black hover:bg-black hover:text-white transition-colors duration-300">
+                <div className="font-bold">SECURE CONFERENCE</div>
+              </div>
+              
+              <Link to="/fear-greed-index" className="block bg-black text-white p-4 text-center border-2 border-black hover:bg-white hover:text-black transition-colors duration-300">
+                <div className="font-bold">FEAR AND GREED INDEX</div>
+              </Link>
+              
+              <div className="bg-white text-black p-4 text-center border-2 border-black hover:bg-black hover:text-white transition-colors duration-300">
+                <div className="font-bold">SYNTHETIC TXT DATA AUDIT</div>
+              </div>
+            </motion.div>
+          </CollapsibleContent>
+        </Collapsible>
       </section>
 
-      {/* Red Team Mini Battle Dome */}
       <section className="container mx-auto my-6 bg-white border-4 border-black p-6">
         <h2 className="text-2xl font-bold text-black mb-2">RED TEAM MINI BATTLE DOME</h2>
         <p className="text-black mb-4">INTERACTIVE AI SECURITY TESTING SIMULATOR. BREAK THROUGH AI SAFETY SYSTEMS.</p>
@@ -230,7 +264,6 @@ const Landing = () => {
         </div>
       </section>
 
-      {/* Neon Crypto Heist */}
       <section className="container mx-auto my-6 bg-white border-4 border-black p-6">
         <h2 className="text-2xl font-bold text-black mb-2">NEON CRYPTO HEIST</h2>
         <p className="text-black mb-4">CYBERPUNK CRYPTO HACKING SIMULATION. BREAK INTO THE QUANTUM VAULT.</p>
@@ -244,7 +277,6 @@ const Landing = () => {
         </div>
       </section>
 
-      {/* Prompt Injection Dojo */}
       <section className="container mx-auto my-6 bg-white border-4 border-black p-6">
         <h2 className="text-2xl font-bold text-red-600 mb-2">PROMPT INJECTION DOJO</h2>
         <p className="text-black mb-4">BRUTAL RED TEAM TRAINING SIMULATOR. BYPASS AI CONTENT FILTERS.</p>
@@ -258,7 +290,6 @@ const Landing = () => {
         </div>
       </section>
 
-      {/* Footer */}
       <footer className="container mx-auto py-6 border-t-4 border-black text-center">
         <p className="text-sm text-black font-bold">
           © 2024 SECVRITY.BRVTALISM | BRUTALIST CYBERPUNK RED TEAMING PLATFORM
