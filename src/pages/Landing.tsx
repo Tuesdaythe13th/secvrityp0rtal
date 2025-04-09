@@ -64,69 +64,69 @@ const Landing = () => {
   }, [toast]);
 
   return (
-    <div className="bg-black text-white min-h-screen">
+    <div className="bg-white text-black min-h-screen">
       {/* Header */}
-      <header className="text-center py-6">
-        <h1 className="text-5xl font-bold text-red-600">SECVRITY.BRVTALISM</h1>
+      <header className="text-center py-6 border-b-4 border-black">
+        <h1 className="text-5xl font-bold text-black">SECVRITY.BRVTALISM</h1>
         <nav className="mt-6 flex justify-center space-x-6">
-          <a href="#" className="hover:text-red-600 transition-colors">HOME</a>
-          <a href="#" className="hover:text-red-600 transition-colors">PUBLICATIONS</a>
-          <a href="#" className="hover:text-red-600 transition-colors">UPCOMING</a>
-          <a href="#" className="hover:text-red-600 transition-colors">SUBSTACK</a>
-          <a href="#" className="hover:text-red-600 transition-colors">RESOURCES</a>
-          <a href="#" className="hover:text-red-600 transition-colors">SIGN UP</a>
+          <a href="#" className="hover:text-red-600 transition-colors font-bold">HOME</a>
+          <a href="#" className="hover:text-red-600 transition-colors font-bold">PUBLICATIONS</a>
+          <a href="#" className="hover:text-red-600 transition-colors font-bold">UPCOMING</a>
+          <a href="#" className="hover:text-red-600 transition-colors font-bold">SUBSTACK</a>
+          <a href="#" className="hover:text-red-600 transition-colors font-bold">RESOURCES</a>
+          <a href="#" className="hover:text-red-600 transition-colors font-bold">SIGN UP</a>
         </nav>
       </header>
 
       {/* Security Threat Monitor */}
-      <section className="container mx-auto my-6 p-4 border-2 border-red-600 bg-gray-900">
+      <section className="container mx-auto my-6 p-4 border-4 border-black bg-white">
         <div className="flex justify-between items-center mb-2">
           <div className="flex items-center">
-            <span className="bg-red-600 px-2 py-1 mr-2">LIVE</span>
-            <span>SECURITY THREAT MONITOR</span>
+            <span className="bg-black text-white px-2 py-1 mr-2 font-bold">LIVE</span>
+            <span className="font-bold">SECURITY THREAT MONITOR</span>
           </div>
           <div className="flex items-center">
-            <span>LIVE</span>
+            <span className="font-bold">LIVE</span>
             <span className="ml-2 w-3 h-3 bg-red-600 rounded-full animate-pulse"></span>
           </div>
         </div>
 
         <div className="grid grid-cols-1 md:grid-cols-3 gap-4 mb-4">
-          <div className="border border-red-600 p-2">
-            <div className="uppercase text-xs text-gray-400">THREATS</div>
-            <div className="text-red-600 text-2xl">{threatCount.toLocaleString()}</div>
+          <div className="border-2 border-black p-2">
+            <div className="uppercase text-xs font-bold">THREATS</div>
+            <div className="text-red-600 text-2xl font-bold">{threatCount.toLocaleString()}</div>
           </div>
-          <div className="border border-red-600 p-2">
-            <div className="uppercase text-xs text-gray-400">COUNTRIES</div>
-            <div className="text-red-600 text-2xl">{countryCount}</div>
+          <div className="border-2 border-black p-2">
+            <div className="uppercase text-xs font-bold">COUNTRIES</div>
+            <div className="text-red-600 text-2xl font-bold">{countryCount}</div>
           </div>
-          <div className="border border-red-600 p-2">
-            <div className="uppercase text-xs text-gray-400">LAST UPDATE</div>
-            <div className="text-red-600 text-2xl">
+          <div className="border-2 border-black p-2">
+            <div className="uppercase text-xs font-bold">LAST UPDATE</div>
+            <div className="text-red-600 text-2xl font-bold">
               {currentTime.toLocaleTimeString([], { hour: '2-digit', minute: '2-digit', second: '2-digit', hour12: false })}
             </div>
           </div>
         </div>
 
-        <div className="border border-red-600 p-2 mb-4 overflow-hidden">
+        <div className="border-2 border-black p-2 mb-4 overflow-hidden">
           <div className="whitespace-nowrap animate-marquee">
-            <span className="inline-block mx-4 text-green-500">CONFERENCES</span>
-            <span className="inline-block mx-4 text-yellow-500">CYBERSECURITY EXPERTS WEIGH IN ON CRUCIAL PROTECTIONS FOR BUSINESSES</span>
-            <span className="inline-block mx-4 text-red-500">NEW TCSB MALWARE FOUND IN SYSTEMS</span>
+            <span className="inline-block mx-4 text-black font-bold">CONFERENCES</span>
+            <span className="inline-block mx-4 text-black">CYBERSECURITY EXPERTS WEIGH IN ON CRUCIAL PROTECTIONS FOR BUSINESSES</span>
+            <span className="inline-block mx-4 text-red-600 font-bold">NEW TCSB MALWARE FOUND IN SYSTEMS</span>
           </div>
         </div>
 
         <div className="mb-4">
-          <div className="uppercase text-xs text-gray-400 mb-2">GLOBAL CYBER THREAT MAP</div>
-          <div className="h-64 bg-black border border-gray-700 flex items-center justify-center">
+          <div className="uppercase text-xs font-bold mb-2">GLOBAL CYBER THREAT MAP</div>
+          <div className="h-64 bg-white border-2 border-black flex items-center justify-center">
             <div className="text-center">
-              <div className="text-xl mb-2">CYBERTHREAT LIVE MAP</div>
+              <div className="text-xl mb-2 font-bold">CYBERTHREAT LIVE MAP</div>
               <div className="text-xs">Powered by kaspersky</div>
             </div>
           </div>
         </div>
 
-        <div className="flex justify-between items-center text-xs">
+        <div className="flex justify-between items-center text-xs font-bold">
           <div>SYSTEM STATUS: OPERATIONAL</div>
           <div>ACCESS: PUBLIC</div>
           <div>SECURITY LEVEL: MAXIMUM</div>
@@ -144,11 +144,11 @@ const Landing = () => {
             { name: "BOTNETS", icon: faGlobe },
             { name: "DDOS", icon: faExclamationTriangle }
           ].map((threat, index) => (
-            <div key={index} className="border border-gray-700 bg-gray-900 p-3 text-center">
-              <div className="text-xs text-gray-400">THREAT TYPE</div>
+            <div key={index} className="border-2 border-black bg-white p-3 text-center">
+              <div className="text-xs font-bold">THREAT TYPE</div>
               <div className="flex items-center justify-center mt-1">
-                <FontAwesomeIcon icon={threat.icon} className="text-red-600 mr-2" />
-                <span className="text-red-600">{threat.name}</span>
+                <FontAwesomeIcon icon={threat.icon} className="text-black mr-2" />
+                <span className="text-black font-bold">{threat.name}</span>
               </div>
             </div>
           ))}
@@ -158,112 +158,112 @@ const Landing = () => {
       {/* Security Tools Grid */}
       <section className="container mx-auto my-6">
         <div className="grid grid-cols-1 md:grid-cols-2 lg:grid-cols-4 gap-4">
-          <Link to="/simulator" className="block bg-red-600 p-4 text-center">
+          <Link to="/simulator" className="block bg-black text-white p-4 text-center border-2 border-black hover:bg-white hover:text-black transition-colors duration-300">
             <div className="font-bold">CRITICAL AI SECURITY</div>
           </Link>
           
-          <Link to="/agentic-ai-101" className="block bg-blue-600 p-4 text-center">
+          <Link to="/agentic-ai-101" className="block bg-white text-black p-4 text-center border-2 border-black hover:bg-black hover:text-white transition-colors duration-300">
             <div className="font-bold">AI ATTACK TAXONOMY</div>
           </Link>
           
-          <div className="bg-yellow-500 p-4 text-center text-black">
+          <div className="bg-black text-white p-4 text-center border-2 border-black hover:bg-white hover:text-black transition-colors duration-300">
             <div className="font-bold">D3FEND GRAPH</div>
           </div>
           
-          <div className="bg-gray-700 p-4 text-center">
+          <div className="bg-white text-black p-4 text-center border-2 border-black hover:bg-black hover:text-white transition-colors duration-300">
             <div className="font-bold">VDP GENERATOR</div>
           </div>
           
-          <div className="bg-orange-400 p-4 text-center text-black">
+          <div className="bg-black text-white p-4 text-center border-2 border-black hover:bg-white hover:text-black transition-colors duration-300">
             <div className="font-bold">INSIDER THREAT</div>
           </div>
           
-          <div className="bg-blue-500 p-4 text-center">
+          <div className="bg-white text-black p-4 text-center border-2 border-black hover:bg-black hover:text-white transition-colors duration-300">
             <div className="font-bold">CLOUD SECURITY</div>
           </div>
           
-          <div className="bg-red-500 p-4 text-center">
+          <div className="bg-black text-white p-4 text-center border-2 border-black hover:bg-white hover:text-black transition-colors duration-300">
             <div className="font-bold">SECURITY AUDIT</div>
           </div>
           
-          <div className="bg-green-500 p-4 text-center text-black">
+          <div className="bg-white text-black p-4 text-center border-2 border-black hover:bg-black hover:text-white transition-colors duration-300">
             <div className="font-bold">AGENT ARCHITECTURE</div>
           </div>
           
-          <Link to="/agentic-ai-101" className="block bg-orange-400 p-4 text-center text-black">
+          <Link to="/agentic-ai-101" className="block bg-black text-white p-4 text-center border-2 border-black hover:bg-white hover:text-black transition-colors duration-300">
             <div className="font-bold">AGENTIC 101</div>
           </Link>
           
-          <div className="bg-blue-600 p-4 text-center">
+          <div className="bg-white text-black p-4 text-center border-2 border-black hover:bg-black hover:text-white transition-colors duration-300">
             <div className="font-bold">BENCHMARK DIRECTORY</div>
           </div>
           
-          <div className="bg-red-500 p-4 text-center">
+          <div className="bg-black text-white p-4 text-center border-2 border-black hover:bg-white hover:text-black transition-colors duration-300">
             <div className="font-bold">VULNERABILITY DATABASE</div>
           </div>
           
-          <div className="bg-green-500 p-4 text-center text-black">
+          <div className="bg-white text-black p-4 text-center border-2 border-black hover:bg-black hover:text-white transition-colors duration-300">
             <div className="font-bold">SECURE CONFERENCE</div>
           </div>
           
-          <Link to="/fear-greed-index" className="block bg-yellow-500 p-4 text-center text-black">
+          <Link to="/fear-greed-index" className="block bg-black text-white p-4 text-center border-2 border-black hover:bg-white hover:text-black transition-colors duration-300">
             <div className="font-bold">FEAR AND GREED INDEX</div>
           </Link>
           
-          <div className="bg-purple-600 p-4 text-center">
+          <div className="bg-white text-black p-4 text-center border-2 border-black hover:bg-black hover:text-white transition-colors duration-300">
             <div className="font-bold">SYNTHETIC TXT DATA AUDIT</div>
           </div>
         </div>
       </section>
 
       {/* Red Team Mini Battle Dome */}
-      <section className="container mx-auto my-6 bg-gray-900 border border-gray-700 p-6">
-        <h2 className="text-2xl font-bold text-green-500 mb-2">RED TEAM MINI BATTLE DOME</h2>
-        <p className="text-gray-400 mb-4">INTERACTIVE AI SECURITY TESTING SIMULATOR. BREAK THROUGH AI SAFETY SYSTEMS.</p>
+      <section className="container mx-auto my-6 bg-white border-4 border-black p-6">
+        <h2 className="text-2xl font-bold text-black mb-2">RED TEAM MINI BATTLE DOME</h2>
+        <p className="text-black mb-4">INTERACTIVE AI SECURITY TESTING SIMULATOR. BREAK THROUGH AI SAFETY SYSTEMS.</p>
         <div className="flex space-x-4">
-          <Link to="/simulator" className="bg-red-600 px-6 py-2 hover:bg-red-700 transition-colors">
+          <Link to="/simulator" className="bg-black text-white px-6 py-2 border-2 border-black hover:bg-white hover:text-black transition-colors duration-300">
             ENTER BATTLE DOME
           </Link>
-          <button className="border border-gray-600 px-6 py-2 hover:bg-gray-800 transition-colors">
+          <button className="border-2 border-black px-6 py-2 hover:bg-black hover:text-white transition-colors duration-300">
             VIEW DOCUMENTATION
           </button>
         </div>
       </section>
 
       {/* Neon Crypto Heist */}
-      <section className="container mx-auto my-6 bg-gray-900 border border-gray-700 p-6 border-t-4 border-cyan-400">
-        <h2 className="text-2xl font-bold text-cyan-400 mb-2">NEON CRYPTO HEIST</h2>
-        <p className="text-gray-400 mb-4">CYBERPUNK CRYPTO HACKING SIMULATION. BREAK INTO THE QUANTUM VAULT.</p>
+      <section className="container mx-auto my-6 bg-white border-4 border-black p-6">
+        <h2 className="text-2xl font-bold text-black mb-2">NEON CRYPTO HEIST</h2>
+        <p className="text-black mb-4">CYBERPUNK CRYPTO HACKING SIMULATION. BREAK INTO THE QUANTUM VAULT.</p>
         <div className="flex space-x-4">
-          <Link to="/neon-crypto-heist" className="bg-cyan-600 px-6 py-2 hover:bg-cyan-700 transition-colors">
+          <Link to="/neon-crypto-heist" className="bg-black text-white px-6 py-2 border-2 border-black hover:bg-white hover:text-black transition-colors duration-300">
             ENTER CRYPTO HEIST
           </Link>
-          <button className="border border-gray-600 px-6 py-2 hover:bg-gray-800 transition-colors">
+          <button className="border-2 border-black px-6 py-2 hover:bg-black hover:text-white transition-colors duration-300">
             VIEW LOOT STATS
           </button>
         </div>
       </section>
 
       {/* Prompt Injection Dojo */}
-      <section className="container mx-auto my-6 bg-gray-900 border border-gray-700 p-6 border-t-4 border-red-600">
-        <h2 className="text-2xl font-bold text-red-500 mb-2">PROMPT INJECTION DOJO</h2>
-        <p className="text-gray-400 mb-4">BRUTAL RED TEAM TRAINING SIMULATOR. BYPASS AI CONTENT FILTERS.</p>
+      <section className="container mx-auto my-6 bg-white border-4 border-black p-6">
+        <h2 className="text-2xl font-bold text-red-600 mb-2">PROMPT INJECTION DOJO</h2>
+        <p className="text-black mb-4">BRUTAL RED TEAM TRAINING SIMULATOR. BYPASS AI CONTENT FILTERS.</p>
         <div className="flex space-x-4">
-          <Link to="/prompt-injection-dojo" className="bg-red-600 px-6 py-2 hover:bg-red-700 transition-colors">
+          <Link to="/prompt-injection-dojo" className="bg-red-600 text-white px-6 py-2 border-2 border-red-600 hover:bg-white hover:text-red-600 transition-colors duration-300">
             ENTER DOJO
           </Link>
-          <button className="border border-gray-600 px-6 py-2 hover:bg-gray-800 transition-colors">
+          <button className="border-2 border-black px-6 py-2 hover:bg-black hover:text-white transition-colors duration-300">
             VIEW TECHNIQUES
           </button>
         </div>
       </section>
 
       {/* Footer */}
-      <footer className="container mx-auto py-6 border-t border-gray-800 text-center">
-        <p className="text-sm text-gray-500">
+      <footer className="container mx-auto py-6 border-t-4 border-black text-center">
+        <p className="text-sm text-black font-bold">
           © 2024 SECVRITY.BRVTALISM | BRUTALIST CYBERPUNK RED TEAMING PLATFORM
         </p>
-        <p className="text-xs text-gray-600 mt-2">
+        <p className="text-xs text-black mt-2">
           SYSTEM STATUS: {isOnline ? "ONLINE" : "OFFLINE"} | 
           LAST UPDATE: {currentTime.toLocaleTimeString()} | 
           SECURITY LEVEL: MAXIMUM
