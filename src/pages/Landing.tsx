@@ -43,6 +43,33 @@ const Landing = () => {
     }
   };
 
+  const glitchTextVariants = {
+    initial: { opacity: 1 },
+    animate: { 
+      opacity: [1, 0.8, 1, 0.9, 1],
+      x: [0, -2, 3, -1, 0],
+      transition: { 
+        duration: 0.5,
+        repeat: Infinity,
+        repeatType: "mirror" 
+      }
+    }
+  };
+
+  const glitchLogoVariants = {
+    initial: { opacity: 1 },
+    animate: { 
+      opacity: [1, 0.9, 1, 0.95, 1],
+      skew: [0, 1, -1, 0.5, 0],
+      scale: [1, 1.01, 0.99, 1.005, 1],
+      transition: { 
+        duration: 3,
+        repeat: Infinity,
+        repeatType: "mirror" 
+      }
+    }
+  };
+
   const pulseVariants = {
     initial: { opacity: 0.6 },
     animate: { 
@@ -50,7 +77,7 @@ const Landing = () => {
       transition: { 
         duration: 2,
         repeat: Infinity,
-        repeatType: "reverse" as const
+        repeatType: "reverse" 
       }
     }
   };
@@ -146,7 +173,7 @@ const Landing = () => {
   };
 
   return (
-    <div className="relative min-h-screen bg-darkBg text-white">
+    <div className="relative min-h-screen bg-white text-black">
       <div className="scanline"></div>
       
       <motion.div 
@@ -155,17 +182,43 @@ const Landing = () => {
         initial="hidden"
         animate="visible"
       >
-        <motion.div variants={logoVariants} className="flex flex-col items-center justify-center mb-8">
-          <img 
-            src="/lovable-uploads/f4cc2880-2437-4c3c-81ae-3821a31d6e66.png" 
-            alt="Artifex Labs Logo" 
-            className="w-[80%] max-w-[700px] mb-4"
-          />
+        <motion.div 
+          variants={logoVariants} 
+          className="flex flex-col items-center justify-center mb-8"
+        >
+          <motion.div
+            variants={glitchLogoVariants}
+            initial="initial"
+            animate="animate"
+            className="relative overflow-hidden"
+          >
+            <img 
+              src="/lovable-uploads/f4cc2880-2437-4c3c-81ae-3821a31d6e66.png" 
+              alt="Artifex Labs Logo" 
+              className="w-[80%] max-w-[700px] mb-4"
+            />
+            <motion.div
+              className="absolute inset-0 bg-red-600 mix-blend-screen opacity-10"
+              animate={{
+                opacity: [0.05, 0.1, 0.05],
+                x: [-5, 0, 5, 0, -5],
+              }}
+              transition={{
+                duration: 5,
+                repeat: Infinity,
+                repeatType: "mirror",
+              }}
+            />
+          </motion.div>
+          
           <motion.h2 
-            className="text-5xl md:text-7xl font-bold mt-4 mb-8 text-center"
+            variants={glitchTextVariants}
+            initial="initial"
+            animate="animate"
+            className="text-5xl md:text-7xl font-bold mt-4 mb-8 text-center monospace"
             style={{ 
-              color: '#0f0', 
-              textShadow: '0 0 5px #0f0, 0 0 10px #0f0, 0 0 15px #0f0' 
+              color: '#ff0000', 
+              textShadow: '2px 2px 0px #000, -2px -2px 0px #000, 3px 0px 0px #000'
             }}
           >
             SECVRITY.BRVTALISM

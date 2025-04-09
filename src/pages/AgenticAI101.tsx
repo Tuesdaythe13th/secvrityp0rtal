@@ -110,14 +110,14 @@ const AgenticAI101 = () => {
     }
   };
 
-  const pulseVariants = {
+  const pulsingVariants = {
     initial: { scale: 1 },
-    animate: {
-      scale: [1, 1.02, 1],
-      transition: {
+    animate: { 
+      scale: [1, 1.05, 1],
+      transition: { 
         duration: 2,
         repeat: Infinity,
-        repeatType: "reverse"
+        repeatType: "mirror" 
       }
     }
   };
@@ -148,7 +148,7 @@ const AgenticAI101 = () => {
           <div className="flex flex-col items-center text-center">
             <motion.h1 
               className="text-5xl md:text-7xl font-bold mb-4 tracking-tighter glow-red"
-              variants={pulseVariants}
+              variants={pulsingVariants}
               initial="initial"
               animate="animate"
             >
