@@ -124,9 +124,9 @@ const SecurityToolkit = ({ isExpanded, setIsExpanded }: SecurityToolkitProps) =>
               <div className="font-bold">SECURITY AUDIT</div>
             </Link>
             
-            <div className="bg-black text-white p-4 text-center border-2 border-black hover:bg-white hover:text-black transition-colors duration-300">
-              <div className="font-bold">AGENT ARCHITECTURE</div>
-            </div>
+            <Link to="/d3fend-graph" className="block bg-white text-black p-4 text-center border-2 border-black hover:bg-black hover:text-white transition-colors duration-300">
+              <div className="font-bold">D3FEND KNOWLEDGE GRAPH</div>
+            </Link>
             
             <Link to="/agentic-ai-101" className="block bg-black text-white p-4 text-center border-2 border-black hover:bg-white hover:text-black transition-colors duration-300">
               <div className="font-bold">AGENTIC 101</div>

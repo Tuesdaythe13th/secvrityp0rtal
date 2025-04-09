@@ -18,6 +18,7 @@ import CloudSecurityTable from "./pages/CloudSecurityTable";
 import CriticalAISecurityGuide from "./pages/CriticalAISecurityGuide";
 import InsiderTaxonomy from "./pages/InsiderTaxonomy";
 import AdversarialTaxonomy from "./pages/AdversarialTaxonomy";
+import D3fendGraph from "./pages/D3fendGraph";
 
 // Create a new QueryClient instance
 const queryClient = new QueryClient();
@@ -43,6 +44,7 @@ const App = () => {
           <Route path="/critical-ai-security" element={<CriticalAISecurityGuide />} />
           <Route path="/insider-taxonomy" element={<InsiderTaxonomy />} />
           <Route path="/adversarial-taxonomy" element={<AdversarialTaxonomy />} />
+          <Route path="/d3fend-graph" element={<D3fendGraph />} />
           {/* ADD ALL CUSTOM ROUTES ABOVE THE CATCH-ALL "*" ROUTE */}
           <Route path="*" element={<NotFound />} />
         </Routes>

@@ -1,0 +1,42 @@
+
+/* D3FEND Graph styles */
+.d3fend-graph-container {
+  font-family: 'IBM Plex Mono', monospace;
+  padding: 1rem;
+}
+
+.brutal-panel {
+  border: 3px solid #000;
+  margin-bottom: 1rem;
+  position: relative;
+  background-color: white;
+}
+
+.brutal-panel:hover {
+  box-shadow: 4px 4px 0 #000;
+  transform: translate(-2px, -2px);
+  transition: all 0.2s;
+}
+
+.brutal-btn {
+  transition: all 0.2s;
+  background-color: rgba(255, 255, 255, 0.8);
+  border: 2px solid black;
+  text-transform: uppercase;
+  font-weight: bold;
+}
+
+.brutal-btn:hover {
+  transform: translate(-2px, -2px);
+  box-shadow: 4px 4px 0 #000;
+}
+
+.brutal-code {
+  font-family: 'Space Mono', monospace;
+  color: #10b981;
+  font-weight: bold;
+}
+
+.hidden {
+  display: none;
+}
