@@ -72,7 +72,7 @@ const Landing = () => {
     { title: "BENCHMARK DIRECTORY", category: "standard" },
     { title: "VULNERABILITY DATABASE", category: "critical" },
     { title: "SECURE CONFERENCE", category: "success" },
-    { title: "FEAR AND GREED INDEX", category: "warning" },
+    { title: "FEAR AND GREED INDEX", category: "warning", route: "/fear-greed-index" },
     { title: "SYNTHETIC TXT DATA AUDIT", category: "standard" }
   ];
 
