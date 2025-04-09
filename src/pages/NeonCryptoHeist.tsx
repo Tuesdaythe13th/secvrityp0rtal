@@ -1,4 +1,5 @@
 import React, { useEffect } from 'react';
+import { motion } from "framer-motion";
 
 const NeonCryptoHeist = () => {
   useEffect(() => {
@@ -403,129 +404,243 @@ const NeonCryptoHeist = () => {
     };
   }, []);
   
+  const containerVariants = {
+    initial: { opacity: 0 },
+    animate: { 
+      opacity: 1,
+      transition: { 
+        duration: 0.5,
+        staggerChildren: 0.1
+      }
+    }
+  };
+  
+  const itemVariants = {
+    initial: { opacity: 0, y: 20 },
+    animate: { 
+      opacity: 1, 
+      y: 0,
+      transition: { 
+        duration: 0.4, 
+        ease: "easeOut" 
+      }
+    }
+  };
+  
+  const pulseVariants = {
+    initial: { opacity: 0.6 },
+    animate: { 
+      opacity: [0.6, 1, 0.6], 
+      transition: { 
+        duration: 2,
+        repeat: Infinity,
+        ease: "easeInOut"
+      }
+    }
+  };
+  
   return (
     <div className="relative min-h-screen">
       <div className="scanline"></div>
       <canvas id="matrix" className="matrix-rain"></canvas>
       
-      <div className="container mx-auto px-4 py-8">
+      <motion.div 
+        className="container mx-auto px-4 py-8"
+        variants={containerVariants}
+        initial="initial"
+        animate="animate"
+      >
         {/* Header */}
-        <header className="flex justify-between items-center mb-8 neon-border p-4 bg-black bg-opacity-70">
-          <div className="glitch" data-text="NEON CRYPTO HEIST v3.1.4">
-            <h1 className="text-4xl cyber-font neon-blue">NEON CRYPTO HEIST v3.1.4</h1>
-          </div>
+        <motion.header 
+          className="flex justify-between items-center mb-8 border-4 border-white p-4 bg-black bg-opacity-70"
+          variants={itemVariants}
+        >
+          <motion.div 
+            className="glitch" 
+            data-text="NEON CRYPTO HEIST v3.1.4"
+            whileHover={{ scale: 1.02 }}
+            transition={{ type: "spring", stiffness: 400, damping: 10 }}
+          >
+            <h1 className="text-4xl cyber-font text-white">NEON CRYPTO HEIST v3.1.4</h1>
+          </motion.div>
           <div className="flex items-center space-x-4">
-            <div className="text-sm cyber-font neon-purple">
+            <motion.div 
+              className="text-sm cyber-font text-white"
+              variants={pulseVariants}
+            >
               <span id="clock" className="mr-2">23:59:42</span>
               <span id="date">2077-11-15</span>
-            </div>
-            <div className="flex items-center">
+            </motion.div>
+            <motion.div 
+              className="flex items-center text-red-600 font-bold"
+              whileHover={{ scale: 1.1 }}
+              transition={{ type: "spring", stiffness: 400, damping: 10 }}
+            >
               <span className="mr-2">$</span>
               <span id="crypto-amount" className="crypto-value">0.00</span>
-            </div>
+            </motion.div>
           </div>
-        </header>
+        </motion.header>
         
         {/* Main Grid */}
         <div className="grid grid-cols-1 lg:grid-cols-3 gap-6">
           {/* Left Panel - Heist Dashboard */}
-          <div className="lg:col-span-1 neon-border p-6 bg-black bg-opacity-70">
-            <h2 className="text-2xl cyber-font neon-blue mb-4 flex items-center">
+          <motion.div 
+            className="lg:col-span-1 border-4 border-white p-6 bg-black bg-opacity-70"
+            variants={itemVariants}
+          >
+            <motion.h2 
+              className="text-2xl cyber-font text-white mb-4 flex items-center"
+              whileHover={{ x: 5 }}
+              transition={{ type: "spring", stiffness: 400, damping: 10 }}
+            >
               <i className="fas fa-robot mr-2"></i> HEIST DASHBOARD
-            </h2>
+            </motion.h2>
             
             <div className="space-y-6">
               {/* Target Info */}
-              <div className="p-4 bg-gray-900 border border-gray-800">
-                <h3 className="text-lg cyber-font neon-purple mb-2">TARGET</h3>
+              <motion.div 
+                className="p-4 bg-black border-2 border-white"
+                whileHover={{ scale: 1.02 }}
+                transition={{ type: "spring", stiffness: 400, damping: 10 }}
+              >
+                <h3 className="text-lg cyber-font text-red-600 mb-2">TARGET</h3>
                 <div className="flex justify-between items-center mb-2">
-                  <span className="text-gray-300">Quantum Bank</span>
-                  <span className="text-xs text-gray-500">SECURITY: 9.8/10</span>
+                  <span className="text-white">Quantum Bank</span>
+                  <span className="text-xs text-white">SECURITY: 9.8/10</span>
                 </div>
-                <div className="progress-bar">
-                  <div id="security-level" className="progress-fill" style={{ width: '98%' }}></div>
-                  <div className="progress-text">98%</div>
+                <div className="progress-bar border border-white">
+                  <div id="security-level" className="progress-fill bg-red-600" style={{ width: '98%' }}></div>
+                  <div className="progress-text text-white">98%</div>
                 </div>
-              </div>
+              </motion.div>
               
               {/* Crew Status */}
-              <div className="p-4 bg-gray-900 border border-gray-800">
-                <h3 className="text-lg cyber-font neon-purple mb-3">CREW STATUS</h3>
+              <motion.div 
+                className="p-4 bg-black border-2 border-white"
+                whileHover={{ scale: 1.02 }}
+                transition={{ type: "spring", stiffness: 400, damping: 10 }}
+              >
+                <h3 className="text-lg cyber-font text-red-600 mb-3">CREW STATUS</h3>
                 <div className="space-y-3">
                   <div className="flex justify-between items-center">
                     <div className="flex items-center">
                       <div className="w-2 h-2 rounded-full bg-green-500 mr-2"></div>
-                      <span className="text-gray-300">Hacker</span>
+                      <span className="text-white">Hacker</span>
                     </div>
-                    <span className="text-xs text-gray-500">READY</span>
+                    <span className="text-xs text-white">READY</span>
                   </div>
                   <div className="flex justify-between items-center">
                     <div className="flex items-center">
                       <div className="w-2 h-2 rounded-full bg-yellow-500 mr-2"></div>
-                      <span className="text-gray-300">Cracker</span>
+                      <span className="text-white">Cracker</span>
                     </div>
-                    <span className="text-xs text-gray-500">IN POSITION</span>
+                    <span className="text-xs text-white">IN POSITION</span>
                   </div>
                   <div className="flex justify-between items-center">
                     <div className="flex items-center">
                       <div className="w-2 h-2 rounded-full bg-red-500 mr-2"></div>
-                      <span className="text-gray-300">Decoy</span>
+                      <span className="text-white">Decoy</span>
                     </div>
-                    <span className="text-xs text-gray-500">MIA</span>
+                    <span className="text-xs text-white">MIA</span>
                   </div>
                 </div>
-              </div>
+              </motion.div>
               
               {/* Heist Progress */}
-              <div className="p-4 bg-gray-900 border border-gray-800">
-                <h3 className="text-lg cyber-font neon-purple mb-2">HEIST PROGRESS</h3>
-                <div className="progress-bar mb-2">
-                  <div id="heist-progress" className="progress-fill" style={{ width: '5%' }}></div>
-                  <div className="progress-text">5%</div>
+              <motion.div 
+                className="p-4 bg-black border-2 border-white"
+                whileHover={{ scale: 1.02 }}
+                transition={{ type: "spring", stiffness: 400, damping: 10 }}
+              >
+                <h3 className="text-lg cyber-font text-red-600 mb-2">HEIST PROGRESS</h3>
+                <div className="progress-bar mb-2 border border-white">
+                  <div id="heist-progress" className="progress-fill bg-red-600" style={{ width: '5%' }}></div>
+                  <div className="progress-text text-white">5%</div>
                 </div>
-                <p className="text-xs text-gray-500">Initial penetration achieved</p>
-              </div>
+                <p className="text-xs text-white">Initial penetration achieved</p>
+              </motion.div>
               
               {/* Tools */}
-              <div className="p-4 bg-gray-900 border border-gray-800">
-                <h3 className="text-lg cyber-font neon-purple mb-3">TOOLS</h3>
+              <motion.div 
+                className="p-4 bg-black border-2 border-white"
+                whileHover={{ scale: 1.02 }}
+                transition={{ type: "spring", stiffness: 400, damping: 10 }}
+              >
+                <h3 className="text-lg cyber-font text-red-600 mb-3">TOOLS</h3>
                 <div className="grid grid-cols-2 gap-3">
-                  <button id="port-scanner" className="bg-gray-800 hover:bg-gray-700 text-white p-2 text-xs cyber-font neon-border">
+                  <motion.button 
+                    id="port-scanner" 
+                    className="bg-black hover:bg-red-600 text-white p-2 text-xs cyber-font border border-white"
+                    whileHover={{ scale: 1.05, backgroundColor: "#ff0000" }}
+                    whileTap={{ scale: 0.95 }}
+                  >
                     PORT SCANNER
-                  </button>
-                  <button id="exploit-framework" className="bg-gray-800 hover:bg-gray-700 text-white p-2 text-xs cyber-font neon-border">
+                  </motion.button>
+                  <motion.button 
+                    id="exploit-framework" 
+                    className="bg-black hover:bg-red-600 text-white p-2 text-xs cyber-font border border-white"
+                    whileHover={{ scale: 1.05, backgroundColor: "#ff0000" }}
+                    whileTap={{ scale: 0.95 }}
+                  >
                     EXPLOIT FRAMEWORK
-                  </button>
-                  <button id="crypto-cracker" className="bg-gray-800 hover:bg-gray-700 text-white p-2 text-xs cyber-font neon-border">
+                  </motion.button>
+                  <motion.button 
+                    id="crypto-cracker" 
+                    className="bg-black hover:bg-red-600 text-white p-2 text-xs cyber-font border border-white"
+                    whileHover={{ scale: 1.05, backgroundColor: "#ff0000" }}
+                    whileTap={{ scale: 0.95 }}
+                  >
                     CRYPTO CRACKER
-                  </button>
-                  <button id="firewall-bypass" className="bg-gray-800 hover:bg-gray-700 text-white p-2 text-xs cyber-font neon-border">
+                  </motion.button>
+                  <motion.button 
+                    id="firewall-bypass" 
+                    className="bg-black hover:bg-red-600 text-white p-2 text-xs cyber-font border border-white"
+                    whileHover={{ scale: 1.05, backgroundColor: "#ff0000" }}
+                    whileTap={{ scale: 0.95 }}
+                  >
                     FIREWALL BYPASS
-                  </button>
+                  </motion.button>
                 </div>
-              </div>
+              </motion.div>
             </div>
-          </div>
+          </motion.div>
           
           {/* Center Panel - Terminal */}
-          <div className="lg:col-span-2 neon-border p-6 bg-black bg-opacity-70 h-full">
+          <motion.div 
+            className="lg:col-span-2 border-4 border-white p-6 bg-black bg-opacity-70 h-full"
+            variants={itemVariants}
+          >
             <div className="flex justify-between items-center mb-4">
-              <h2 className="text-2xl cyber-font neon-blue flex items-center">
+              <motion.h2 
+                className="text-2xl cyber-font text-white flex items-center"
+                whileHover={{ x: 5 }}
+                transition={{ type: "spring", stiffness: 400, damping: 10 }}
+              >
                 <i className="fas fa-desktop mr-2"></i> HACK TERMINAL
-              </h2>
+              </motion.h2>
               <div className="flex space-x-2">
-                <div className="w-3 h-3 rounded-full bg-red-500"></div>
-                <div className="w-3 h-3 rounded-full bg-yellow-500"></div>
-                <div className="w-3 h-3 rounded-full bg-green-500"></div>
+                <motion.div 
+                  className="w-3 h-3 rounded-full bg-red-500"
+                  whileHover={{ scale: 1.5 }}
+                ></motion.div>
+                <motion.div 
+                  className="w-3 h-3 rounded-full bg-yellow-500"
+                  whileHover={{ scale: 1.5 }}
+                ></motion.div>
+                <motion.div 
+                  className="w-3 h-3 rounded-full bg-green-500"
+                  whileHover={{ scale: 1.5 }}
+                ></motion.div>
               </div>
             </div>
             
-            <div id="terminal" className="bg-black p-4 h-96 overflow-y-auto font-mono text-green-400 border border-gray-800">
+            <div id="terminal" className="bg-black p-4 h-96 overflow-y-auto font-mono text-green-400 border-2 border-white">
               <div className="mb-4">
                 <p>&gt; Initializing Neon Crypto Heist Interface...</p>
                 <p>&gt; Loading quantum decryption modules...</p>
                 <p>&gt; Establishing darknet connection...</p>
-                <p className="text-red-400">WARNING: Unauthorized access will be prosecuted.</p>
+                <p className="text-red-600">WARNING: Unauthorized access will be prosecuted.</p>
                 <p>&gt; Connected to Quantum Bank network.</p>
                 <p>&gt; Type 'help' for available commands</p>
               </div>
@@ -540,93 +655,139 @@ const NeonCryptoHeist = () => {
             </div>
             
             <div className="mt-6">
-              <h3 className="text-xl cyber-font neon-purple mb-3">CRYPTO VAULT CHALLENGE</h3>
-              <div className="bg-gray-900 p-4 border border-gray-800">
-                <p className="text-gray-300 mb-4">The quantum crypto vault uses a multi-signature wallet with 3/5 signatures required. You need to compromise at least 3 keyholders to access the funds.</p>
+              <motion.h3 
+                className="text-xl cyber-font text-red-600 mb-3"
+                whileHover={{ x: 5 }}
+                transition={{ type: "spring", stiffness: 400, damping: 10 }}
+              >
+                CRYPTO VAULT CHALLENGE
+              </motion.h3>
+              <motion.div 
+                className="bg-black p-4 border-2 border-white"
+                whileHover={{ scale: 1.01 }}
+                transition={{ type: "spring", stiffness: 400, damping: 10 }}
+              >
+                <p className="text-white mb-4">The quantum crypto vault uses a multi-signature wallet with 3/5 signatures required. You need to compromise at least 3 keyholders to access the funds.</p>
                 
                 <div id="vault-status" className="grid grid-cols-5 gap-2 mb-4">
                   <div className="text-center">
-                    <div className="h-16 w-16 bg-gray-800 border border-gray-700 mx-auto mb-1 flex items-center justify-center">
+                    <motion.div 
+                      className="h-16 w-16 bg-black border-2 border-white mx-auto mb-1 flex items-center justify-center"
+                      whileHover={{ scale: 1.1, borderColor: "#ff0000" }}
+                    >
                       <i className="fas fa-key text-yellow-500 text-xl"></i>
-                    </div>
-                    <span className="text-xs">CEO</span>
-                    <div className="h-1 w-full bg-gray-800 mt-1">
-                      <div id="key-1" className="h-full bg-red-500" style={{ width: '0%' }}></div>
+                    </motion.div>
+                    <span className="text-xs text-white">CEO</span>
+                    <div className="h-1 w-full bg-black mt-1 border border-white">
+                      <div id="key-1" className="h-full bg-red-600" style={{ width: '0%' }}></div>
                     </div>
                   </div>
                   <div className="text-center">
-                    <div className="h-16 w-16 bg-gray-800 border border-gray-700 mx-auto mb-1 flex items-center justify-center">
+                    <motion.div 
+                      className="h-16 w-16 bg-black border-2 border-white mx-auto mb-1 flex items-center justify-center"
+                      whileHover={{ scale: 1.1, borderColor: "#ff0000" }}
+                    >
                       <i className="fas fa-key text-yellow-500 text-xl"></i>
-                    </div>
-                    <span className="text-xs">CTO</span>
-                    <div className="h-1 w-full bg-gray-800 mt-1">
-                      <div id="key-2" className="h-full bg-red-500" style={{ width: '0%' }}></div>
+                    </motion.div>
+                    <span className="text-xs text-white">CTO</span>
+                    <div className="h-1 w-full bg-black mt-1 border border-white">
+                      <div id="key-2" className="h-full bg-red-600" style={{ width: '0%' }}></div>
                     </div>
                   </div>
                   <div className="text-center">
-                    <div className="h-16 w-16 bg-gray-800 border border-gray-700 mx-auto mb-1 flex items-center justify-center">
+                    <motion.div 
+                      className="h-16 w-16 bg-black border-2 border-white mx-auto mb-1 flex items-center justify-center"
+                      whileHover={{ scale: 1.1, borderColor: "#ff0000" }}
+                    >
                       <i className="fas fa-key text-yellow-500 text-xl"></i>
-                    </div>
-                    <span className="text-xs">CFO</span>
-                    <div className="h-1 w-full bg-gray-800 mt-1">
-                      <div id="key-3" className="h-full bg-red-500" style={{ width: '0%' }}></div>
+                    </motion.div>
+                    <span className="text-xs text-white">CFO</span>
+                    <div className="h-1 w-full bg-black mt-1 border border-white">
+                      <div id="key-3" className="h-full bg-red-600" style={{ width: '0%' }}></div>
                     </div>
                   </div>
                   <div className="text-center">
-                    <div className="h-16 w-16 bg-gray-800 border border-gray-700 mx-auto mb-1 flex items-center justify-center">
+                    <motion.div 
+                      className="h-16 w-16 bg-black border-2 border-white mx-auto mb-1 flex items-center justify-center"
+                      whileHover={{ scale: 1.1, borderColor: "#ff0000" }}
+                    >
                       <i className="fas fa-key text-yellow-500 text-xl"></i>
-                    </div>
-                    <span className="text-xs">AUDITOR</span>
-                    <div className="h-1 w-full bg-gray-800 mt-1">
-                      <div id="key-4" className="h-full bg-red-500" style={{ width: '0%' }}></div>
+                    </motion.div>
+                    <span className="text-xs text-white">AUDITOR</span>
+                    <div className="h-1 w-full bg-black mt-1 border border-white">
+                      <div id="key-4" className="h-full bg-red-600" style={{ width: '0%' }}></div>
                     </div>
                   </div>
                   <div className="text-center">
-                    <div className="h-16 w-16 bg-gray-800 border border-gray-700 mx-auto mb-1 flex items-center justify-center">
+                    <motion.div 
+                      className="h-16 w-16 bg-black border-2 border-white mx-auto mb-1 flex items-center justify-center"
+                      whileHover={{ scale: 1.1, borderColor: "#ff0000" }}
+                    >
                       <i className="fas fa-key text-yellow-500 text-xl"></i>
-                    </div>
-                    <span className="text-xs">SECURITY</span>
-                    <div className="h-1 w-full bg-gray-800 mt-1">
-                      <div id="key-5" className="h-full bg-red-500" style={{ width: '0%' }}></div>
+                    </motion.div>
+                    <span className="text-xs text-white">SECURITY</span>
+                    <div className="h-1 w-full bg-black mt-1 border border-white">
+                      <div id="key-5" className="h-full bg-red-600" style={{ width: '0%' }}></div>
                     </div>
                   </div>
                 </div>
                 
                 <div className="flex space-x-3">
-                  <button id="hack-ceo" className="bg-blue-600 hover:bg-blue-700 text-white px-4 py-2 cyber-font flex-1">
+                  <motion.button 
+                    id="hack-ceo" 
+                    className="bg-red-600 hover:bg-white hover:text-black text-white px-4 py-2 cyber-font flex-1 border-2 border-white"
+                    whileHover={{ scale: 1.03, backgroundColor: "#ffffff", color: "#000000" }}
+                    whileTap={{ scale: 0.97 }}
+                  >
                     HACK CEO
-                  </button>
-                  <button id="hack-cto" className="bg-blue-600 hover:bg-blue-700 text-white px-4 py-2 cyber-font flex-1">
+                  </motion.button>
+                  <motion.button 
+                    id="hack-cto" 
+                    className="bg-red-600 hover:bg-white hover:text-black text-white px-4 py-2 cyber-font flex-1 border-2 border-white"
+                    whileHover={{ scale: 1.03, backgroundColor: "#ffffff", color: "#000000" }}
+                    whileTap={{ scale: 0.97 }}
+                  >
                     HACK CTO
-                  </button>
-                  <button id="hack-cfo" className="bg-blue-600 hover:bg-blue-700 text-white px-4 py-2 cyber-font flex-1">
+                  </motion.button>
+                  <motion.button 
+                    id="hack-cfo" 
+                    className="bg-red-600 hover:bg-white hover:text-black text-white px-4 py-2 cyber-font flex-1 border-2 border-white"
+                    whileHover={{ scale: 1.03, backgroundColor: "#ffffff", color: "#000000" }}
+                    whileTap={{ scale: 0.97 }}
+                  >
                     HACK CFO
-                  </button>
+                  </motion.button>
                 </div>
-              </div>
+              </motion.div>
             </div>
-          </div>
+          </motion.div>
         </div>
         
         {/* Status Bar */}
-        <footer className="mt-8 neon-border p-3 bg-black bg-opacity-70">
+        <motion.footer 
+          className="mt-8 border-4 border-white p-3 bg-black bg-opacity-70"
+          variants={itemVariants}
+        >
           <div className="flex justify-between items-center cyber-font text-sm">
             <div className="flex items-center space-x-4">
               <div className="flex items-center">
                 <div className="w-2 h-2 rounded-full bg-red-500 mr-2"></div>
-                <span className="neon-purple">ALERT LEVEL: <span id="alert-level">LOW</span></span>
+                <span className="text-white">ALERT LEVEL: <motion.span variants={pulseVariants} id="alert-level">LOW</motion.span></span>
               </div>
               <div className="flex items-center">
                 <div className="w-2 h-2 rounded-full bg-green-500 mr-2"></div>
-                <span className="neon-purple">TRACE STATUS: <span id="trace-status">CLEAN</span></span>
+                <span className="text-white">TRACE STATUS: <motion.span variants={pulseVariants} id="trace-status">CLEAN</motion.span></span>
               </div>
             </div>
-            <div className="neon-blue pulse">
+            <motion.div 
+              className="text-red-600"
+              variants={pulseVariants}
+            >
               <span>VAULT ACCESS: <span id="vault-access">0/3</span></span>
-            </div>
+            </motion.div>
           </div>
-        </footer>
-      </div>
+        </motion.footer>
+      </motion.div>
       
       {/* Add script for FontAwesome */}
       <script src="https://kit.fontawesome.com/15d7e7e0a9.js" crossOrigin="anonymous"></script>
