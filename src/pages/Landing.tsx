@@ -1,9 +1,10 @@
 import { motion } from 'framer-motion';
-import { Link } from 'react-router-dom';
+import { Link, useNavigate } from 'react-router-dom';
 import { useToast } from '@/hooks/use-toast';
 
 const Landing = () => {
   const { toast } = useToast();
+  const navigate = useNavigate();
 
   const containerVariants = {
     hidden: { opacity: 0 },
@@ -67,7 +68,7 @@ const Landing = () => {
     { title: "CLOUD SECURITY", category: "info" },
     { title: "SECURITY AUDIT", category: "standard" },
     { title: "AGENT ARCHITECTURE", category: "standard" },
-    { title: "AGENTIC 101", category: "caution" },
+    { title: "AGENTIC 101", category: "caution", route: "/agentic-ai-101" },
     { title: "BENCHMARK DIRECTORY", category: "standard" },
     { title: "VULNERABILITY DATABASE", category: "critical" },
     { title: "SECURE CONFERENCE", category: "success" },
@@ -132,12 +133,16 @@ const Landing = () => {
     }
   };
 
-  const handleModuleClick = (title: string) => {
-    toast({
-      title: `Module Selected: ${title}`,
-      description: "Loading security module...",
-      variant: "destructive",
-    });
+  const handleModuleClick = (title: string, route?: string) => {
+    if (route) {
+      navigate(route);
+    } else {
+      toast({
+        title: `Module Selected: ${title}`,
+        description: "Loading security module...",
+        variant: "destructive",
+      });
+    }
   };
 
   return (
@@ -288,7 +293,7 @@ const Landing = () => {
                 animate="visible"
                 whileHover="hover"
                 whileTap={{ scale: 0.98 }}
-                onClick={() => handleModuleClick(module.title)}
+                onClick={() => handleModuleClick(module.title, module.route)}
               >
                 {module.title}
               </motion.button>

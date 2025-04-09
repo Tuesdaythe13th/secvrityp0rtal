@@ -1,0 +1,106 @@
+
+@keyframes fadeIn {
+  from { opacity: 0; transform: translateY(10px); }
+  to { opacity: 1; transform: translateY(0); }
+}
+
+@keyframes flicker {
+  0% { opacity: 0.8; }
+  50% { opacity: 1; }
+  100% { opacity: 0.8; }
+}
+
+@keyframes scanline {
+  0% { background-position: 0 -100vh; }
+  100% { background-position: 0 100vh; }
+}
+
+@keyframes pulse {
+  0% { opacity: 0.6; }
+  50% { opacity: 1; }
+  100% { opacity: 0.6; }
+}
+
+@keyframes flash {
+  0% { border-color: black; }
+  50% { border-color: red; }
+  100% { border-color: black; }
+}
+
+@keyframes flashText {
+  0% { opacity: 1; }
+  50% { opacity: 0.5; }
+  100% { opacity: 1; }
+}
+
+.fade-in {
+  animation: fadeIn 0.8s ease-out forwards;
+}
+
+.flicker {
+  animation: flicker 3s infinite;
+}
+
+.scanlines {
+  position: relative;
+  overflow: hidden;
+}
+
+.scanlines::after {
+  content: "";
+  position: absolute;
+  top: 0;
+  left: 0;
+  right: 0;
+  bottom: 0;
+  background: linear-gradient(
+    to bottom,
+    rgba(255, 0, 0, 0.03) 50%,
+    rgba(255, 0, 0, 0.1) 50%
+  );
+  background-size: 100% 4px;
+  pointer-events: none;
+  animation: scanline 8s linear infinite;
+  z-index: 100;
+}
+
+.blood-drop {
+  position: absolute;
+  width: 60px;
+  height: 60px;
+  background: radial-gradient(circle, rgba(255,0,0,0.8) 0%, rgba(255,0,0,0) 70%);
+  border-radius: 50%;
+  pointer-events: none;
+  z-index: 90;
+}
+
+.flash-border {
+  animation: flash 3s infinite;
+}
+
+.section-transition {
+  transition: all 0.4s cubic-bezier(0.68, -0.55, 0.27, 1.55);
+  max-height: 0;
+  overflow: hidden;
+}
+
+.section-transition.open {
+  max-height: 2000px;
+}
+
+.highlight-box {
+  transition: all 0.3s ease;
+}
+
+.highlight-box:hover {
+  transform: translateY(-3px);
+  box-shadow: 0 10px 15px rgba(0, 0, 0, 0.3);
+}
+
+.glow-red {
+  text-shadow: 0 0 8px rgba(255, 0, 0, 0.7);
+}
+
+.flashing-text {
+  animation: flashText 2s infinite;
+}

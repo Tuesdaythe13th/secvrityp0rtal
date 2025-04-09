@@ -1,6 +1,6 @@
-
 import { useEffect } from "react";
 import { Link } from "react-router-dom";
+import "../styles/AgenticAI101.css";
 
 const AgenticAI101 = () => {
   useEffect(() => {
