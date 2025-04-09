@@ -5,39 +5,39 @@
 
 @layer base {
   :root {
-    --background: 0 0% 4%;
-    --foreground: 0 0% 100%;
+    --background: 0 0% 100%;
+    --foreground: 0 0% 0%;
 
-    --card: 0 0% 4%;
-    --card-foreground: 0 0% 100%;
+    --card: 0 0% 100%;
+    --card-foreground: 0 0% 0%;
 
-    --popover: 0 0% 4%;
-    --popover-foreground: 0 0% 100%;
+    --popover: 0 0% 100%;
+    --popover-foreground: 0 0% 0%;
 
-    --primary: 346 100% 50%;
+    --primary: 0 100% 50%;
     --primary-foreground: 0 0% 100%;
 
-    --secondary: 324 100% 50%;
+    --secondary: 0 0% 0%;
     --secondary-foreground: 0 0% 100%;
 
-    --muted: 240 4% 16%;
-    --muted-foreground: 240 5% 65%;
+    --muted: 0 0% 96%;
+    --muted-foreground: 0 0% 45%;
 
-    --accent: 324 100% 50%;
+    --accent: 0 100% 50%;
     --accent-foreground: 0 0% 100%;
 
     --destructive: 0 85% 60%;
     --destructive-foreground: 0 0% 100%;
 
-    --border: 240 5% 26%;
-    --input: 240 5% 26%;
-    --ring: 346 100% 50%;
+    --border: 0 0% 0%;
+    --input: 0 0% 80%;
+    --ring: 0 100% 50%;
 
     --radius: 0;
     
     --neon-blue: #00f0ff;
     --neon-purple: #9600ff;
-    --neon-red: #ff5555;
+    --neon-red: #ff0000;
   }
 }
 
@@ -47,7 +47,7 @@
   }
 
   body {
-    @apply bg-darkBg text-foreground relative overflow-x-hidden;
+    @apply bg-white text-foreground relative overflow-x-hidden;
     font-family: 'Share Tech Mono', monospace;
   }
 
@@ -62,148 +62,44 @@
 
 @layer components {
   .neon-red {
-    @apply text-neonRed;
-    text-shadow: 0 0 5px #ff003c, 0 0 10px #ff003c;
+    @apply text-red-600;
+    text-shadow: 0 0 5px #ff0000, 0 0 10px #ff0000;
   }
 
   .neon-pink {
-    @apply text-neonPink;
-    text-shadow: 0 0 5px #ff00aa, 0 0 10px #ff00aa;
+    @apply text-red-500;
+    text-shadow: 0 0 5px #ff0000, 0 0 10px #ff0000;
   }
 
   .neon-border {
-    @apply border border-neonRed;
-    box-shadow: 0 0 10px #ff003c, inset 0 0 10px #ff003c;
+    @apply border border-red-600;
+    box-shadow: 0 0 10px #ff0000, inset 0 0 10px #ff0000;
   }
 
   .neon-glow {
-    box-shadow: 0 0 15px #ff003c;
+    box-shadow: 0 0 15px #ff0000;
   }
 
   .brutalist-panel {
-    @apply border-2 border-gray-800 bg-black bg-opacity-70;
+    @apply border-2 border-black bg-white bg-opacity-95;
+  }
+
+  .standard-card {
+    @apply bg-white border-2 border-black p-4 shadow-md transition-all duration-300;
   }
   
-  .glitch {
-    position: relative;
+  .highlight-card {
+    @apply bg-white border-2 border-red-600 p-4 shadow-md transition-all duration-300;
   }
   
-  .glitch::before, .glitch::after {
-    content: attr(data-text);
-    position: absolute;
-    top: 0;
-    left: 0;
-    width: 100%;
-    height: 100%;
-    background: #0a0a0a;
+  .standard-button {
+    @apply bg-black text-white px-4 py-2 border-2 border-black hover:bg-red-600 hover:border-red-600 transition-colors duration-300;
   }
   
-  .glitch::before {
-    left: 2px;
-    text-shadow: -2px 0 #ff00aa;
-    clip: rect(44px, 450px, 56px, 0);
-    animation: glitch-anim-1 2s infinite linear alternate-reverse;
+  .highlight-button {
+    @apply bg-red-600 text-white px-4 py-2 border-2 border-red-600 hover:bg-black hover:border-black transition-colors duration-300;
   }
   
-  .glitch::after {
-    left: -2px;
-    text-shadow: -2px 0 #ff003c;
-    clip: rect(44px, 450px, 56px, 0);
-    animation: glitch-anim-2 2s infinite linear alternate-reverse;
-  }
-  
-  .scanline {
-    position: absolute;
-    top: 0;
-    left: 0;
-    width: 100%;
-    height: 100%;
-    background: linear-gradient(
-      to bottom,
-      rgba(255, 0, 60, 0.1) 0%,
-      rgba(255, 0, 60, 0) 10%
-    );
-    background-size: 100% 8px;
-    animation: scanline 4s linear infinite;
-    pointer-events: none;
-    z-index: 50;
-  }
-  
-  .terminal-cursor {
-    display: inline-block;
-    width: 10px;
-    height: 20px;
-    background-color: #ff003c;
-    animation: blink 1s infinite;
-  }
-  
-  .typewriter {
-    overflow: hidden;
-    border-right: 3px solid #ff003c;
-    white-space: nowrap;
-    margin: 0 auto;
-    letter-spacing: 2px;
-    animation: typing 3.5s steps(40, end), blink-caret 0.75s step-end infinite;
-  }
-  
-  /* Neon Crypto Heist specific styles */
-  .neon-blue {
-    color: var(--neon-blue);
-    text-shadow: 0 0 5px var(--neon-blue), 0 0 10px var(--neon-blue);
-  }
-  
-  .neon-purple {
-    color: var(--neon-purple);
-    text-shadow: 0 0 5px var(--neon-purple), 0 0 10px var(--neon-purple);
-  }
-  
-  .matrix-rain {
-    position: absolute;
-    top: 0;
-    left: 0;
-    width: 100%;
-    height: 100%;
-    z-index: -1;
-    opacity: 0.1;
-    pointer-events: none;
-  }
-  
-  .progress-bar {
-    height: 20px;
-    background-color: #111;
-    border: 1px solid var(--neon-blue);
-    position: relative;
-    overflow: hidden;
-  }
-  
-  .progress-fill {
-    height: 100%;
-    background-color: var(--neon-blue);
-    width: 0%;
-    transition: width 0.3s ease;
-  }
-  
-  .progress-text {
-    position: absolute;
-    top: 50%;
-    left: 50%;
-    transform: translate(-50%, -50%);
-    color: white;
-    font-size: 12px;
-  }
-  
-  .crypto-value {
-    font-family: 'VT323', monospace;
-    font-size: 1.5rem;
-    color: var(--neon-blue);
-    text-shadow: 0 0 5px var(--neon-blue);
-  }
-  
-  .hack-animation {
-    animation: hack-pulse 0.5s infinite alternate;
-  }
-  
-  /* Prompt Injection Dojo styles */
   .brutal-border {
     border: 4px solid #ff5555;
     box-shadow: 8px 8px 0 #ff0000;

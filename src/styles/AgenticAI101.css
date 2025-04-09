@@ -23,7 +23,7 @@
 
 @keyframes flash {
   0% { border-color: black; }
-  50% { border-color: red; }
+  50% { border-color: #ff0000; }
   100% { border-color: black; }
 }
 
@@ -103,4 +103,21 @@
 
 .flashing-text {
   animation: flashText 2s infinite;
+}
+
+/* Updated color scheme */
+.text-highlight {
+  color: #ff0000;
+}
+
+.bg-primary {
+  background-color: #ffffff;
+}
+
+.bg-secondary {
+  background-color: #000000;
+}
+
+.border-highlight {
+  border-color: #ff0000;
 }
