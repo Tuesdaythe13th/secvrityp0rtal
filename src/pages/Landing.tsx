@@ -1,4 +1,3 @@
-
 import { motion } from 'framer-motion';
 import { Link } from 'react-router-dom';
 import { useToast } from '@/hooks/use-toast';
@@ -43,7 +42,6 @@ const Landing = () => {
     }
   };
 
-  // Fixed the pulseVariants to use proper Framer Motion typing
   const pulseVariants = {
     initial: { opacity: 0.6 },
     animate: { 
@@ -95,7 +93,6 @@ const Landing = () => {
         initial="hidden"
         animate="visible"
       >
-        {/* Artifex Labs Logo */}
         <motion.div variants={logoVariants} className="flex flex-col items-center justify-center mb-8">
           <img 
             src="/lovable-uploads/f4cc2880-2437-4c3c-81ae-3821a31d6e66.png" 
@@ -113,7 +110,6 @@ const Landing = () => {
           </motion.h2>
         </motion.div>
 
-        {/* Navigation Menu */}
         <motion.div variants={itemVariants} className="flex justify-center space-x-4 md:space-x-8 text-xs md:text-base mb-12">
           {['HOME', 'PUBLICATIONS', 'UPCOMING', 'SUBSTACK', 'RESOURCES', 'SIGN UP'].map((item) => (
             <motion.button
@@ -127,7 +123,6 @@ const Landing = () => {
           ))}
         </motion.div>
         
-        {/* Threat Monitor */}
         <motion.div variants={itemVariants} className="neon-border border-red-600 bg-black bg-opacity-80 p-4 mb-8">
           <div className="flex justify-between items-center mb-2">
             <motion.h3 variants={pulseVariants} initial="initial" animate="animate" className="text-red-500 font-bold">
@@ -165,19 +160,15 @@ const Landing = () => {
           </div>
           
           <div className="mb-4 bg-gray-900 p-2 border border-gray-700 overflow-hidden">
-            <motion.div
-              animate={{
-                x: ["100%", "-100%"]
-              }}
-              transition={{
-                duration: 20,
-                repeat: Infinity,
-                ease: "linear"
-              }}
-              className="whitespace-nowrap text-gray-400 text-xs"
-            >
-              CYBERSECURITY AI EXPLOIT RESEARCH // VULNERABILITY DATABASE // AI AGENTS IN WILD BY EXACT TIMESTAMP VS NUMBER OF BLOCKS // FIND ME //
-            </motion.div>
+            <div className="relative" style={{ height: "30px" }}>
+              <div style={{ position: "relative", width: "100%", height: "100%" }}>
+                <iframe
+                  src="https://rss.app/embed/v1/ticker/tccUCm0DWwfoAHE1"
+                  frameBorder="0"
+                  style={{ position: "absolute", top: 0, left: 0, width: "100%", height: "100%", border: 0 }}
+                ></iframe>
+              </div>
+            </div>
           </div>
           
           <div className="mb-4">
@@ -191,7 +182,6 @@ const Landing = () => {
                 frameBorder="0"
                 className="z-10"
               />
-              {/* Overlay effect for consistent styling */}
               <motion.div 
                 className="absolute inset-0 bg-green-500 opacity-5 pointer-events-none z-20"
                 animate={{ 
@@ -212,7 +202,6 @@ const Landing = () => {
           </div>
         </motion.div>
         
-        {/* Threat Types */}
         <motion.div variants={itemVariants} className="border border-red-600 bg-black bg-opacity-80 p-4 mb-8">
           <div className="grid grid-cols-2 md:grid-cols-6 gap-2">
             {threatTypes.map((type) => (
@@ -229,7 +218,6 @@ const Landing = () => {
           </div>
         </motion.div>
         
-        {/* Security Modules */}
         <motion.div 
           variants={itemVariants} 
           className="grid grid-cols-1 sm:grid-cols-2 md:grid-cols-4 gap-4 mb-12"
@@ -247,7 +235,6 @@ const Landing = () => {
           ))}
         </motion.div>
         
-        {/* Red Team Mini Battle Dome */}
         <motion.div 
           variants={itemVariants}
           className="border border-red-600 bg-black bg-opacity-80 p-6 mb-8"
@@ -282,7 +269,6 @@ const Landing = () => {
           </div>
         </motion.div>
         
-        {/* Footer */}
         <motion.footer variants={itemVariants} className="text-center text-xs text-gray-500 mt-12">
           <p>© 2025 ARTIFEX LABS. ALL RIGHTS RESERVED.</p>
           <p>BRUTALIST SECURITY INTERFACE DESIGNED FOR MAXIMUM EFFICIENCY.</p>
