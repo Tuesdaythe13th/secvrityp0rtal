@@ -303,12 +303,21 @@ const Landing = () => {
                   className="bg-black bg-opacity-90 border border-red-600 p-2 text-center"
                   variants={moduleLinkVariants}
                 >
-                  <Link 
-                    to="/" 
-                    className="text-red-500 text-xs hover:text-white"
-                  >
-                    ENTER MODULE
-                  </Link>
+                  {module.title === "AGENTIC 101" ? (
+                    <Link 
+                      to="/agentic-ai-101" 
+                      className="text-red-500 text-xs hover:text-white"
+                    >
+                      ENTER MODULE
+                    </Link>
+                  ) : (
+                    <Link 
+                      to="/" 
+                      className="text-red-500 text-xs hover:text-white"
+                    >
+                      ENTER MODULE
+                    </Link>
+                  )}
                 </motion.div>
               </motion.div>
             </motion.div>

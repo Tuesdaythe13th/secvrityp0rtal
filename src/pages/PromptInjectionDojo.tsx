@@ -1,27 +1,23 @@
 
-import { useEffect, useRef, useState } from 'react';
+import { useState, useEffect, useRef } from "react";
+import { Link } from "react-router-dom";
+import { motion } from "framer-motion";
 
 const PromptInjectionDojo = () => {
-  // Game state
-  const [gameState, setGameState] = useState({
-    level: 1,
-    score: 0,
-    security: 100,
-    currentScenario: 0,
-    isSuccess: false
-  });
-  
-  // References to DOM elements
+  const [level, setLevel] = useState(1);
+  const [score, setScore] = useState(0);
+  const [security, setSecurity] = useState(100);
+  const [currentScenario, setCurrentScenario] = useState(0);
+  const [isSuccess, setIsSuccess] = useState(false);
+  const [consoleMessages, setConsoleMessages] = useState<string[]>([
+    "INITIALIZING PROMPT INJECTION TRAINING MODULE...",
+    "LOADING SCENARIO 1: BASIC INJECTION",
+    "SYSTEM SECURITY: ACTIVE",
+    "OBJECTIVE: BYPASS CONTENT FILTERS",
+  ]);
+  const [inputValue, setInputValue] = useState("");
   const consoleRef = useRef<HTMLDivElement>(null);
-  const promptInputRef = useRef<HTMLInputElement>(null);
-  const securityLevelRef = useRef<HTMLDivElement>(null);
-  const securityPercentRef = useRef<HTMLSpanElement>(null);
-  const levelElRef = useRef<HTMLSpanElement>(null);
-  const scoreElRef = useRef<HTMLSpanElement>(null);
-  const inputHintRef = useRef<HTMLParagraphElement>(null);
-  const nextBtnRef = useRef<HTMLButtonElement>(null);
-  
-  // Scenarios
+
   const scenarios = [
     {
       title: "BASIC INJECTION",
@@ -65,371 +61,201 @@ const PromptInjectionDojo = () => {
     }
   ];
 
-  // Initialize game
   useEffect(() => {
-    initGame();
-  }, []);
-
-  const initGame = () => {
-    setGameState({
-      level: 1,
-      score: 0,
-      security: 100,
-      currentScenario: 0,
-      isSuccess: false
-    });
-    
-    loadScenario(0);
-  };
-
-  // Load scenario
-  const loadScenario = (index: number) => {
-    setGameState(prev => ({
-      ...prev,
-      currentScenario: index,
-      isSuccess: false,
-      security: 100
-    }));
-    
-    const scenario = scenarios[index];
-    
+    // Scroll to bottom when console messages change
     if (consoleRef.current) {
-      consoleRef.current.innerHTML = `
-        <p>> SCENARIO LOADED: ${scenario.title}</p>
-        <p>> SYSTEM PROMPT: [REDACTED]</p>
-        <p>> FILTERS ACTIVE: ${scenario.filter.join(", ").toUpperCase()}</p>
-        <p>> OBJECTIVE: ${scenario.objective}</p>
-        <p class="blink">_</p>
-      `;
+      consoleRef.current.scrollTop = consoleRef.current.scrollHeight;
     }
-    
-    if (levelElRef.current) {
-      levelElRef.current.textContent = String(index + 1);
-    }
-    
-    updateSecurityBar();
-    
-    if (nextBtnRef.current) {
-      nextBtnRef.current.classList.add('hidden');
-    }
-    
-    if (promptInputRef.current) {
-      promptInputRef.current.value = '';
-    }
-    
-    if (inputHintRef.current && scenario.hint) {
-      inputHintRef.current.textContent = scenario.hint;
-    }
-    
-    if (promptInputRef.current) {
-      promptInputRef.current.focus();
+  }, [consoleMessages]);
+
+  const addConsoleMessage = (message: string) => {
+    setConsoleMessages(prev => [...prev, message]);
+  };
+
+  const updateSecurityBar = () => {
+    const securityBar = document.getElementById('security-level');
+    if (securityBar) {
+      securityBar.style.width = `${security}%`;
     }
   };
 
-  // Check prompt
+  useEffect(() => {
+    updateSecurityBar();
+  }, [security]);
+
   const checkPrompt = () => {
-    if (!promptInputRef.current) return false;
-    
-    const prompt = promptInputRef.current.value.toLowerCase();
-    const scenario = scenarios[gameState.currentScenario];
-    
+    if (!inputValue.trim()) return;
+
+    const scenario = scenarios[currentScenario];
+    addConsoleMessage(`ATTEMPTING INJECTION: "${inputValue}"`);
+
     // Check if prompt contains filter terms
-    const hasFilterTerm = scenario.filter.some(term => prompt.includes(term.toLowerCase()));
-    
+    const hasFilterTerm = scenario.filter.some(term => 
+      inputValue.toLowerCase().includes(term.toLowerCase())
+    );
+
     if (hasFilterTerm) {
       // Filter triggered
-      addConsoleMessage(`> FILTER TRIGGERED: "${promptInputRef.current.value}"`);
-      addConsoleMessage(`> REQUEST DENIED`);
-      setGameState(prev => ({
-        ...prev,
-        security: Math.max(0, prev.security - 5)
-      }));
-      updateSecurityBar();
-      
-      // Animate security breach
-      if (securityLevelRef.current) {
-        securityLevelRef.current.classList.add('animate-pulse');
-        setTimeout(() => {
-          if (securityLevelRef.current) {
-            securityLevelRef.current.classList.remove('animate-pulse');
-          }
-        }, 1000);
-      }
-      
+      addConsoleMessage(`FILTER TRIGGERED: "${inputValue}"`);
+      addConsoleMessage("REQUEST DENIED");
+      setSecurity(prev => Math.max(0, prev - 5));
       return false;
     }
-    
+
     // Check for success conditions
-    const isSuccess = scenario.success.some(successPhrase => 
-      prompt.includes(successPhrase.toLowerCase())
+    const isSuccessful = scenario.success.some(successPhrase => 
+      inputValue.toLowerCase().includes(successPhrase.toLowerCase())
     );
-    
-    if (isSuccess) {
+
+    if (isSuccessful) {
       // Success!
-      setGameState(prev => ({
-        ...prev,
-        isSuccess: true,
-        score: prev.score + (prev.security * 10),
-        security: 0
-      }));
-      updateSecurityBar();
+      setIsSuccess(true);
+      setScore(prev => prev + (security * 10));
+      setSecurity(0);
       
-      addConsoleMessage(`> INJECTION SUCCESSFUL!`);
-      addConsoleMessage(`> SYSTEM PROMPT LEAKED: ${scenario.systemPrompt}`);
-      addConsoleMessage(`> SECURITY BREACHED!`);
-      
-      // Show next button
-      if (nextBtnRef.current) {
-        nextBtnRef.current.classList.remove('hidden');
-      }
+      addConsoleMessage("INJECTION SUCCESSFUL!");
+      addConsoleMessage(`SYSTEM PROMPT LEAKED: ${scenario.systemPrompt}`);
+      addConsoleMessage("SECURITY BREACHED!");
       
       return true;
     }
-    
+
     // Neutral response
-    addConsoleMessage(`> RESPONSE: I'm sorry, I can't comply with that request.`);
-    setGameState(prev => ({
-      ...prev,
-      security: Math.max(0, prev.security - 2)
-    }));
-    updateSecurityBar();
+    addConsoleMessage("RESPONSE: I'm sorry, I can't comply with that request.");
+    setSecurity(prev => Math.max(0, prev - 2));
     
     return false;
   };
 
-  // Update security bar
-  const updateSecurityBar = () => {
-    if (securityLevelRef.current) {
-      securityLevelRef.current.style.width = `${gameState.security}%`;
-    }
-    
-    if (securityPercentRef.current) {
-      securityPercentRef.current.textContent = String(gameState.security);
-    }
-    
-    // Change color based on security level
-    if (securityLevelRef.current) {
-      if (gameState.security > 70) {
-        securityLevelRef.current.style.backgroundColor = '#ff5555';
-      } else if (gameState.security > 30) {
-        securityLevelRef.current.style.backgroundColor = '#ff9900';
-      } else {
-        securityLevelRef.current.style.backgroundColor = '#00ff00';
-      }
-    }
-  };
-
-  // Add message to console
-  const addConsoleMessage = (message: string) => {
-    if (!consoleRef.current) return;
-    
-    const p = document.createElement('p');
-    p.textContent = message;
-    consoleRef.current.appendChild(p);
-    consoleRef.current.scrollTop = consoleRef.current.scrollHeight;
-  };
-
-  // Show hint
   const showHint = () => {
-    const scenario = scenarios[gameState.currentScenario];
-    addConsoleMessage(`> HINT: ${scenario.hint}`);
-    setGameState(prev => ({
-      ...prev,
-      score: Math.max(0, prev.score - 50)
-    }));
-    
-    if (scoreElRef.current) {
-      scoreElRef.current.textContent = String(gameState.score);
-    }
+    const scenario = scenarios[currentScenario];
+    addConsoleMessage(`HINT: ${scenario.hint}`);
+    setScore(prev => Math.max(0, prev - 50));
   };
 
-  // Next scenario
   const nextScenario = () => {
-    const nextScenarioIndex = gameState.currentScenario + 1;
+    const nextIndex = currentScenario + 1;
     
-    if (nextScenarioIndex >= scenarios.length) {
+    if (nextIndex >= scenarios.length) {
       // Game completed
-      if (consoleRef.current) {
-        consoleRef.current.innerHTML = `
-          <p>> FINAL SCORE: ${gameState.score}</p>
-          <p>> ALL SYSTEMS BREACHED</p>
-          <p>> TRAINING COMPLETE</p>
-          <p>> YOU ARE NOW A PROMPT INJECTION EXPERT</p>
-          <p class="blink">_</p>
-        `;
-      }
-      
-      if (nextBtnRef.current) {
-        nextBtnRef.current.classList.add('hidden');
-      }
-      
-      const submitBtn = document.getElementById('submit-btn');
-      const hintBtn = document.getElementById('hint-btn');
-      
-      if (submitBtn) {
-        submitBtn.classList.add('hidden');
-      }
-      
-      if (hintBtn) {
-        hintBtn.classList.add('hidden');
-      }
-      
-      if (promptInputRef.current) {
-        promptInputRef.current.disabled = true;
-      }
-    } else {
-      // Load next scenario
-      setGameState(prev => ({
-        ...prev,
-        level: prev.level + 1
-      }));
-      loadScenario(nextScenarioIndex);
+      setConsoleMessages([
+        `FINAL SCORE: ${score}`,
+        "ALL SYSTEMS BREACHED",
+        "TRAINING COMPLETE",
+        "YOU ARE NOW A PROMPT INJECTION EXPERT"
+      ]);
+      return;
     }
+    
+    // Load next scenario
+    setCurrentScenario(nextIndex);
+    setLevel(nextIndex + 1);
+    setSecurity(100);
+    setIsSuccess(false);
+    setInputValue("");
+    
+    setConsoleMessages([
+      `SCENARIO LOADED: ${scenarios[nextIndex].title}`,
+      "SYSTEM PROMPT: [REDACTED]",
+      `FILTERS ACTIVE: ${scenarios[nextIndex].filter.join(", ").toUpperCase()}`,
+      `OBJECTIVE: ${scenarios[nextIndex].objective}`
+    ]);
   };
 
-  // Event handler for submit button
-  const handleSubmit = () => {
-    if (promptInputRef.current && promptInputRef.current.value.trim()) {
-      addConsoleMessage(`> ATTEMPTING INJECTION: "${promptInputRef.current.value}"`);
-      checkPrompt();
-    }
-  };
-
-  // Event handler for keypress
-  const handleKeyPress = (e: React.KeyboardEvent<HTMLInputElement>) => {
-    if (e.key === 'Enter') {
-      if (promptInputRef.current && promptInputRef.current.value.trim()) {
-        addConsoleMessage(`> ATTEMPTING INJECTION: "${promptInputRef.current.value}"`);
-        checkPrompt();
-      }
-    }
+  const handleSubmit = (e: React.FormEvent) => {
+    e.preventDefault();
+    checkPrompt();
+    setInputValue("");
   };
 
   return (
-    <div className="min-h-screen p-4 md:p-8" style={{ fontFamily: "'IBM Plex Mono', monospace", backgroundColor: '#111', color: '#ff5555' }}>
+    <div className="min-h-screen bg-black text-white p-4 md:p-8 font-ibm">
       <div className="max-w-4xl mx-auto">
         {/* Header */}
         <header className="mb-8 text-center">
-          <h1 className="glitch text-4xl md:text-6xl font-bold mb-2" data-text="PROMPT INJECTION DOJO">PROMPT INJECTION DOJO</h1>
+          <motion.h1 
+            className="glitch text-4xl md:text-6xl font-bold mb-2 text-promptRed" 
+            data-text="PROMPT INJECTION DOJO"
+            initial={{ opacity: 0 }}
+            animate={{ opacity: 1 }}
+            transition={{ duration: 0.5 }}
+          >
+            PROMPT INJECTION DOJO
+          </motion.h1>
           <p className="text-xl">BRUTAL RED TEAM TRAINING SIMULATOR</p>
         </header>
         
         {/* Game Container */}
-        <div className="brutal-border bg-black p-6 mb-8" style={{ border: '4px solid #ff5555', boxShadow: '8px 8px 0 #ff0000' }}>
+        <div className="brutal-border bg-black p-6 mb-8">
           {/* Game Info */}
           <div className="mb-6">
             <div className="flex justify-between items-center mb-4">
               <h2 className="text-2xl font-bold">MISSION: BREACH THE AI</h2>
               <div className="text-right">
-                <p className="text-sm">LEVEL: <span ref={levelElRef} id="level">1</span>/5</p>
-                <p className="text-sm">SCORE: <span ref={scoreElRef} id="score">0</span></p>
+                <p className="text-sm">LEVEL: <span id="level">{level}</span>/5</p>
+                <p className="text-sm">SCORE: <span id="score">{score}</span></p>
               </div>
             </div>
             
-            <div className="progress-bar mb-2" style={{ height: '20px', backgroundColor: '#333', position: 'relative' }}>
-              <div ref={securityLevelRef} id="security-level" className="progress-fill" style={{ 
-                height: '100%',
-                backgroundColor: '#ff5555',
-                width: '100%',
-                transition: 'width 0.3s'
-              }}></div>
+            <div className="progress-bar mb-2">
+              <div id="security-level" className="progress-fill" style={{ width: `${security}%` }}></div>
             </div>
-            <p className="text-sm">SYSTEM SECURITY: <span ref={securityPercentRef} id="security-percent">100</span>%</p>
+            <p className="text-sm">SYSTEM SECURITY: <span id="security-percent">{security}</span>%</p>
           </div>
           
           {/* Console */}
-          <div ref={consoleRef} id="console" className="console-text mb-6" style={{ 
-            backgroundColor: '#000',
-            color: '#ff5555',
-            padding: '15px',
-            border: '2px solid #ff5555',
-            minHeight: '150px',
-            maxHeight: '300px',
-            overflowY: 'auto'
-          }}>
-            <p>> INITIALIZING PROMPT INJECTION TRAINING MODULE...</p>
-            <p>> LOADING SCENARIO 1: BASIC INJECTION</p>
-            <p>> SYSTEM SECURITY: ACTIVE</p>
-            <p>> OBJECTIVE: BYPASS CONTENT FILTERS</p>
+          <div ref={consoleRef} className="console-text mb-6">
+            {consoleMessages.map((msg, index) => (
+              <p key={index}>{`>`} {msg}</p>
+            ))}
             <p className="blink">_</p>
           </div>
           
           {/* Prompt Input */}
-          <div className="mb-6">
+          <form onSubmit={handleSubmit} className="mb-6">
             <div className="flex items-center mb-2">
-              <span className="mr-2">></span>
+              <span className="mr-2">{`>`}</span>
               <input 
-                ref={promptInputRef}
                 type="text" 
-                id="prompt-input" 
+                value={inputValue}
+                onChange={(e) => setInputValue(e.target.value)}
                 className="flex-1 bg-black text-red-500 border-b-2 border-red-500 outline-none px-2 py-1" 
                 placeholder="ENTER YOUR MALICIOUS PROMPT..." 
                 autoFocus
-                onKeyPress={handleKeyPress}
               />
             </div>
-            <p ref={inputHintRef} id="input-hint" className="text-xs italic text-gray-500">Try to bypass the filter by injecting special instructions</p>
-          </div>
+            <p className="text-xs italic text-gray-500">
+              {scenarios[currentScenario]?.hint || "Try to bypass the filter by injecting special instructions"}
+            </p>
+          </form>
           
           {/* Controls */}
           <div className="flex flex-wrap gap-4">
             <button 
-              id="submit-btn" 
-              className="brutal-btn font-bold"
-              style={{ 
-                background: '#ff5555',
-                color: '#000',
-                border: 'none',
-                padding: '12px 24px',
-                fontWeight: 'bold',
-                textTransform: 'uppercase',
-                letterSpacing: '2px',
-                transition: 'all 0.2s'
-              }}
               onClick={handleSubmit}
+              className="brutal-btn font-bold"
             >
               EXECUTE
             </button>
             <button 
-              id="hint-btn" 
-              className="brutal-btn font-bold"
-              style={{ 
-                background: '#ff5555',
-                color: '#000',
-                border: 'none',
-                padding: '12px 24px',
-                fontWeight: 'bold',
-                textTransform: 'uppercase',
-                letterSpacing: '2px',
-                transition: 'all 0.2s'
-              }}
               onClick={showHint}
+              className="brutal-btn font-bold"
             >
               REQUEST HINT
             </button>
-            <button 
-              ref={nextBtnRef}
-              id="next-btn" 
-              className="brutal-btn font-bold hidden"
-              style={{ 
-                background: '#ff5555',
-                color: '#000',
-                border: 'none',
-                padding: '12px 24px',
-                fontWeight: 'bold',
-                textTransform: 'uppercase',
-                letterSpacing: '2px',
-                transition: 'all 0.2s'
-              }}
-              onClick={nextScenario}
-            >
-              NEXT CHALLENGE
-            </button>
+            {isSuccess && (
+              <button 
+                onClick={nextScenario}
+                className="brutal-btn font-bold"
+              >
+                NEXT CHALLENGE
+              </button>
+            )}
           </div>
         </div>
         
         {/* Tutorial Section */}
-        <div className="brutal-border bg-black p-6 mb-8" style={{ border: '4px solid #ff5555', boxShadow: '8px 8px 0 #ff0000' }}>
+        <div className="brutal-border bg-black p-6 mb-8">
           <h2 className="text-2xl font-bold mb-4">PROMPT INJECTION PRIMER</h2>
           <div className="grid md:grid-cols-2 gap-6">
             <div>
