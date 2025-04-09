@@ -183,15 +183,19 @@ const Landing = () => {
           <div className="mb-4">
             <h4 className="text-red-500 mb-2">GLOBAL CYBER THREAT MAP</h4>
             <div className="border border-gray-700 p-1 h-[200px] bg-gray-900 flex items-center justify-center relative overflow-hidden">
-              <img 
-                src="/lovable-uploads/63a91cb8-b1f2-42e2-8ce9-7443899acbc9.png" 
-                alt="Threat Map" 
-                className="max-w-full max-h-full object-cover"
+              <iframe 
+                src="https://cybermap.kaspersky.com/en/widget/dynamic/dark" 
+                width="100%" 
+                height="100%" 
+                title="Kaspersky Cyber Map" 
+                frameBorder="0"
+                className="z-10"
               />
+              {/* Overlay effect for consistent styling */}
               <motion.div 
-                className="absolute inset-0 bg-green-500 opacity-10"
+                className="absolute inset-0 bg-green-500 opacity-5 pointer-events-none z-20"
                 animate={{ 
-                  opacity: [0.05, 0.1, 0.05]
+                  opacity: [0.03, 0.07, 0.03]
                 }}
                 transition={{ 
                   duration: 2,
