@@ -43,7 +43,8 @@ export default function AdversarialTaxonomy() {
   return (
     <div className="min-h-screen flex flex-col bg-black text-white">
       {/* Styles */}
-      <style jsx>{`
+      <style>
+        {`
         @import url('https://fonts.googleapis.com/css2?family=Space+Mono:wght@400;700&family=IBM+Plex+Mono:wght@400;700&display=swap');
         
         .brutal-border {
@@ -101,7 +102,8 @@ export default function AdversarialTaxonomy() {
             border-color: #ff0000;
             box-shadow: 0 0 10px rgba(255,0,0,0.5);
         }
-      `}</style>
+        `}
+      </style>
 
       {/* Content */}
       <div className="fixed top-4 left-4 z-50">
