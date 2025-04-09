@@ -1,4 +1,3 @@
-
 import { motion } from "framer-motion";
 import { Link } from "react-router-dom";
 import { ChevronDown, ChevronUp } from "lucide-react";
@@ -12,6 +11,54 @@ interface SecurityToolkitProps {
   isExpanded: boolean;
   setIsExpanded: React.Dispatch<React.SetStateAction<boolean>>;
 }
+
+const securityFeatures = [
+  {
+    title: "Network Security Simulator",
+    description: "Interactive sandbox for testing network security defenses",
+    link: "/simulator",
+  },
+  {
+    title: "Vulnerability Database",
+    description: "Searchable database of known vulnerabilities",
+    link: "/vulnerability-database",
+  },
+  {
+    title: "Security Audit Tool",
+    description: "Automated security auditing for web applications",
+    link: "/security-audit",
+  },
+  {
+    title: "Market Fear & Greed Index",
+    description: "Real-time cryptocurrency market sentiment analysis",
+    link: "/fear-greed-index",
+  },
+  {
+    title: "VDP Generator",
+    description: "Vulnerability Disclosure Policy generator for organizations",
+    link: "/vdp-generator",
+  },
+  {
+    title: "Cloud Security Table",
+    description: "Periodic table of cloud security controls and threats",
+    link: "/cloud-security-table",
+  },
+  {
+    title: "Synthetic Data Audit",
+    description: "Quality assessment tool for AI training data",
+    link: "/synthetic-data-audit",
+  },
+  {
+    title: "Critical AI Security Guide",
+    description: "Comprehensive AI security guidelines and best practices",
+    link: "/critical-ai-security",
+  },
+  {
+    title: "Insider Threat Taxonomy",
+    description: "Framework for categorizing and addressing insider threats",
+    link: "/insider-taxonomy",
+  },
+];
 
 const SecurityToolkit = ({ isExpanded, setIsExpanded }: SecurityToolkitProps) => {
   return (

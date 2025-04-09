@@ -1,6 +1,7 @@
 
 import { useEffect } from "react";
 import { Link } from "react-router-dom";
+import "../styles/CriticalAISecurityGuide.css";
 
 export default function CriticalAISecurityGuide() {
   useEffect(() => {
@@ -319,74 +320,6 @@ export default function CriticalAISecurityGuide() {
           </div>
         </section>
       </div>
-
-      <style jsx>{`
-        /* Custom brutalist styles */
-        .brutal-border {
-          border: 3px solid #000;
-          box-shadow: 8px 8px 0 #000;
-        }
-        .brutal-border-thin {
-          border: 2px solid #000;
-        }
-        .brutal-btn {
-          transition: all 0.2s;
-          background-color: black;
-          color: white;
-          border: 2px solid black;
-          text-transform: uppercase;
-          padding: 0.75rem 1.5rem;
-          font-weight: bold;
-          font-family: 'Courier New', monospace;
-        }
-        .brutal-btn:hover {
-          transform: translate(-2px, -2px);
-          box-shadow: 4px 4px 0 #000;
-        }
-        .brutal-btn:active {
-          transform: translate(0, 0);
-          box-shadow: none;
-        }
-        .brutal-btn-red {
-          background-color: #ff4444;
-          color: white;
-          border: 2px solid black;
-        }
-        .scrollbar-custom::-webkit-scrollbar {
-          width: 10px;
-          height: 10px;
-        }
-        .scrollbar-custom::-webkit-scrollbar-track {
-          background: #f1f1f1;
-          border: 2px solid #000;
-        }
-        .scrollbar-custom::-webkit-scrollbar-thumb {
-          background: #ff4444;
-          border: 2px solid #000;
-        }
-        .red-underline {
-          border-bottom: 2px solid #ff4444;
-        }
-        .red-bullet::before {
-          content: "■";
-          color: #ff4444;
-          margin-right: 0.5rem;
-        }
-        .monospace {
-          font-family: 'Courier New', monospace;
-        }
-        .vibrate {
-          animation: vibrate 0.3s linear infinite;
-        }
-        @keyframes vibrate {
-          0% { transform: translate(0); }
-          20% { transform: translate(-2px, 2px); }
-          40% { transform: translate(-2px, -2px); }
-          60% { transform: translate(2px, 2px); }
-          80% { transform: translate(2px, -2px); }
-          100% { transform: translate(0); }
-        }
-      `}</style>
     </div>
   );
 }
