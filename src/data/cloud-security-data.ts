@@ -1,4 +1,5 @@
 
+// Cloud Security Periodic Table Data
 export const categories = [
   { id: "identity", name: "IDENTITY MANAGEMENT", color: "#F5A77E" },
   { id: "network", name: "NETWORK MANAGEMENT", color: "#E5EB7D" },
@@ -10,7 +11,7 @@ export const categories = [
   { id: "data", name: "DATA MANAGEMENT", color: "#7DE9A6" },
   { id: "threat-prevention", name: "THREAT PREVENTION", color: "#E97D9C" },
   { id: "cloud-products", name: "CLOUD SECURITY PRODUCTS", color: "#D9D9D9" },
-]
+];
 
 export const elements = [
   // Identity Management
@@ -333,7 +334,7 @@ export const elements = [
     category: "cloud-products",
     description: "Protects cloud workloads",
   },
-]
+];
 
 // Table layout configuration
 export const tableLayout = {
@@ -392,4 +393,4 @@ export const tableLayout = {
   ],
   // Cloud products at bottom
   cloudProducts: ["sspm", "soar", "cwpp"],
-}
+};

@@ -32,7 +32,7 @@ function Element3D({
 
   return (
     <Box ref={meshRef} args={[1, 1, 0.2]} onClick={onClick} position={[0, 0, 0]}>
-      <meshStandardMaterial color={color} />
+      <meshStandardMaterial attach="material" color={color} />
       <Text position={[0, 0, 0.11]} fontSize={0.3} color="#000000" anchorX="center" anchorY="middle">
         {element.symbol}
       </Text>
@@ -219,7 +219,7 @@ export default function CloudSecurityTable() {
                 <pointLight position={[10, 10, 10]} />
                 <OrbitControls enableZoom={false} enablePan={false} />
                 <Box args={[20, 20, 0.1]} position={[0, 0, -5]}>
-                  <meshStandardMaterial color="#333333" />
+                  <meshStandardMaterial attach="material" color="#333333" />
                 </Box>
               </Canvas>
             </div>
