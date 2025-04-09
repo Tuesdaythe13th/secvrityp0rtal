@@ -1,0 +1,58 @@
+
+@import url('https://fonts.googleapis.com/css2?family=Space+Mono:wght@400;700&family=IBM+Plex+Mono:wght@400;700&display=swap');
+
+.brutal-border {
+    border: 8px solid #fff;
+    position: relative;
+    transition: all 0.3s ease;
+}
+
+.brutal-border:hover {
+    border-color: #ff0000;
+}
+
+.taxonomy-item {
+    margin-bottom: 16px;
+    padding: 12px;
+    background-color: rgba(255, 255, 255, 0.05);
+    border-left: 4px solid #ff0000;
+    transition: all 0.3s ease;
+    cursor: pointer;
+}
+
+.taxonomy-item:hover {
+    background-color: rgba(255, 255, 255, 0.1);
+    transform: translateX(5px);
+}
+
+.error-corruption {
+    position: fixed;
+    top: 0;
+    left: 0;
+    width: 100%;
+    height: 100%;
+    background: 
+        linear-gradient(rgba(18, 16, 16, 0) 50%, rgba(0, 0, 0, 0.25) 50%), 
+        linear-gradient(90deg, rgba(255, 0, 0, 0.06), rgba(0, 255, 0, 0.02), rgba(0, 0, 255, 0.06));
+    background-size: 100% 2px, 3px 100%;
+    pointer-events: none;
+    z-index: 10;
+    opacity: 0.4;
+}
+
+.search-box {
+    background: rgba(255,255,255,0.1);
+    border: 2px solid #fff;
+    color: white;
+    padding: 10px 15px;
+    font-family: 'IBM Plex Mono', monospace;
+    width: 100%;
+    margin-bottom: 20px;
+    transition: all 0.3s ease;
+}
+
+.search-box:focus {
+    outline: none;
+    border-color: #ff0000;
+    box-shadow: 0 0 10px rgba(255,0,0,0.5);
+}
