@@ -312,7 +312,7 @@ const Landing = () => {
                 <div className="font-bold">INSIDER THREAT</div>
               </div>
               
-              <div className="bg-white text-black p-4 text-center border-2 border-black hover:bg-white hover:text-black transition-colors duration-300">
+              <div className="bg-white text-black p-4 text-center border-2 border-black hover:bg-black hover:text-white transition-colors duration-300">
                 <div className="font-bold">CLOUD SECURITY</div>
               </div>
               
