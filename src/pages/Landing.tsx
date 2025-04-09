@@ -59,21 +59,78 @@ const Landing = () => {
   ];
 
   const securityModules = [
-    { title: "CRITICAL AI SECURITY", color: "bg-red-500" },
-    { title: "AI ATTACK TAXONOMY", color: "bg-red-500" },
-    { title: "D3FEND GRAPH", color: "bg-yellow-500" },
-    { title: "VDP GENERATOR", color: "bg-white" },
-    { title: "INSIDER THREAT", color: "bg-white" },
-    { title: "CLOUD SECURITY", color: "bg-blue-500" },
-    { title: "SECURITY AUDIT", color: "bg-white" },
-    { title: "AGENT ARCHITECTURE", color: "bg-white" },
-    { title: "AGENTIC 101", color: "bg-orange-400" },
-    { title: "BENCHMARK DIRECTORY", color: "bg-white" },
-    { title: "VULNERABILITY DATABASE", color: "bg-red-500" },
-    { title: "SECURE CONFERENCE", color: "bg-green-500" },
-    { title: "FEAR AND GREED INDEX", color: "bg-yellow-500" },
-    { title: "SYNTHETIC TXT DATA AUDIT", color: "bg-white" }
+    { title: "CRITICAL AI SECURITY", category: "critical" },
+    { title: "AI ATTACK TAXONOMY", category: "critical" },
+    { title: "D3FEND GRAPH", category: "warning" },
+    { title: "VDP GENERATOR", category: "standard" },
+    { title: "INSIDER THREAT", category: "standard" },
+    { title: "CLOUD SECURITY", category: "info" },
+    { title: "SECURITY AUDIT", category: "standard" },
+    { title: "AGENT ARCHITECTURE", category: "standard" },
+    { title: "AGENTIC 101", category: "caution" },
+    { title: "BENCHMARK DIRECTORY", category: "standard" },
+    { title: "VULNERABILITY DATABASE", category: "critical" },
+    { title: "SECURE CONFERENCE", category: "success" },
+    { title: "FEAR AND GREED INDEX", category: "warning" },
+    { title: "SYNTHETIC TXT DATA AUDIT", category: "standard" }
   ];
+
+  const moduleColors = {
+    critical: "bg-red-500",
+    warning: "bg-yellow-500",
+    standard: "bg-white",
+    info: "bg-blue-500",
+    caution: "bg-orange-400",
+    success: "bg-green-500"
+  };
+
+  const moduleVariants = {
+    hidden: { opacity: 0, y: 20 },
+    visible: {
+      opacity: 1,
+      y: 0,
+      transition: {
+        type: "spring",
+        stiffness: 100,
+        damping: 10
+      }
+    },
+    hover: {
+      scale: 1.05,
+      y: -5,
+      transition: {
+        type: "spring",
+        stiffness: 400,
+        damping: 10
+      }
+    }
+  };
+
+  const moduleFrameVariants = {
+    hidden: { opacity: 0, height: "0px" },
+    visible: {
+      opacity: 1,
+      height: "auto",
+      transition: {
+        duration: 0.5,
+        ease: "easeInOut"
+      }
+    }
+  };
+
+  const moduleLinkVariants = {
+    hidden: { opacity: 0, x: -20 },
+    visible: {
+      opacity: 1,
+      x: 0,
+      transition: {
+        delay: 0.2,
+        type: "spring",
+        stiffness: 100,
+        damping: 10
+      }
+    }
+  };
 
   const handleModuleClick = (title: string) => {
     toast({
@@ -222,16 +279,39 @@ const Landing = () => {
           variants={itemVariants} 
           className="grid grid-cols-1 sm:grid-cols-2 md:grid-cols-4 gap-4 mb-12"
         >
-          {securityModules.map((module) => (
-            <motion.button
-              key={module.title}
-              className={`p-4 text-black font-bold text-center ${module.color} hover:opacity-90`}
-              whileHover={{ scale: 1.02, y: -5 }}
-              whileTap={{ scale: 0.98 }}
-              onClick={() => handleModuleClick(module.title)}
-            >
-              {module.title}
-            </motion.button>
+          {securityModules.map((module, index) => (
+            <motion.div key={module.title} className="flex flex-col">
+              <motion.button
+                className={`p-4 text-black font-bold text-center ${moduleColors[module.category as keyof typeof moduleColors]}`}
+                variants={moduleVariants}
+                initial="hidden"
+                animate="visible"
+                whileHover="hover"
+                whileTap={{ scale: 0.98 }}
+                onClick={() => handleModuleClick(module.title)}
+              >
+                {module.title}
+              </motion.button>
+              
+              <motion.div
+                className="overflow-hidden"
+                variants={moduleFrameVariants}
+                initial="hidden"
+                whileHover="visible"
+              >
+                <motion.div 
+                  className="bg-black bg-opacity-90 border border-red-600 p-2 text-center"
+                  variants={moduleLinkVariants}
+                >
+                  <Link 
+                    to="/" 
+                    className="text-red-500 text-xs hover:text-white"
+                  >
+                    ENTER MODULE
+                  </Link>
+                </motion.div>
+              </motion.div>
+            </motion.div>
           ))}
         </motion.div>
         
