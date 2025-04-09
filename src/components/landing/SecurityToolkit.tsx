@@ -60,9 +60,9 @@ const SecurityToolkit = ({ isExpanded, setIsExpanded }: SecurityToolkitProps) =>
               <div className="font-bold">D3FEND GRAPH</div>
             </div>
             
-            <div className="bg-white text-black p-4 text-center border-2 border-black hover:bg-black hover:text-white transition-colors duration-300">
+            <Link to="/vdp-generator" className="block bg-white text-black p-4 text-center border-2 border-black hover:bg-black hover:text-white transition-colors duration-300">
               <div className="font-bold">VDP GENERATOR</div>
-            </div>
+            </Link>
             
             <div className="bg-black text-white p-4 text-center border-2 border-black hover:bg-white hover:text-black transition-colors duration-300">
               <div className="font-bold">INSIDER THREAT</div>
@@ -92,7 +92,7 @@ const SecurityToolkit = ({ isExpanded, setIsExpanded }: SecurityToolkitProps) =>
               <div className="font-bold">VULNERABILITY DATABASE</div>
             </Link>
             
-            <div className="bg-white text-black p-4 text-center border-2 border-black hover:bg-white hover:text-black transition-colors duration-300">
+            <div className="bg-white text-black p-4 text-center border-2 border-black hover:bg-black hover:text-white transition-colors duration-300">
               <div className="font-bold">SECURE CONFERENCE</div>
             </div>
             
