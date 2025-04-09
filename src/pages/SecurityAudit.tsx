@@ -1,7 +1,5 @@
-
-import React, { useEffect } from "react";
+import { useEffect } from "react";
 import { Link } from "react-router-dom";
-import { motion } from "framer-motion";
 import { ArrowLeft } from "lucide-react";
 
 const SecurityAudit = () => {
@@ -686,8 +684,7 @@ const SecurityAudit = () => {
         </div>
       </div>
 
-      <style>
-        {`
+      <style jsx="true">{`
         @keyframes fadeIn {
           from { opacity: 0; transform: translateY(10px); }
           to { opacity: 1; transform: translateY(0); }
@@ -780,8 +777,7 @@ const SecurityAudit = () => {
           font-size: 12px;
           letter-spacing: 1px;
         }
-      `}
-      </style>
+      `}</style>
     </div>
   );
 };
