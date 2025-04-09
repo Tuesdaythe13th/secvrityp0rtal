@@ -12,6 +12,7 @@ import AgenticAI101 from "./pages/AgenticAI101";
 import FearGreedIndex from "./pages/FearGreedIndex";
 import VulnerabilityDatabase from "./pages/VulnerabilityDatabase";
 import SecurityAudit from "./pages/SecurityAudit";
+import SyntheticDataAudit from "./pages/SyntheticDataAudit";
 
 // Create a new QueryClient instance
 const queryClient = new QueryClient();
@@ -31,6 +32,7 @@ const App = () => {
           <Route path="/fear-greed-index" element={<FearGreedIndex />} />
           <Route path="/vulnerability-database" element={<VulnerabilityDatabase />} />
           <Route path="/security-audit" element={<SecurityAudit />} />
+          <Route path="/synthetic-data-audit" element={<SyntheticDataAudit />} />
           {/* ADD ALL CUSTOM ROUTES ABOVE THE CATCH-ALL "*" ROUTE */}
           <Route path="*" element={<NotFound />} />
         </Routes>

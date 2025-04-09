@@ -100,9 +100,9 @@ const SecurityToolkit = ({ isExpanded, setIsExpanded }: SecurityToolkitProps) =>
               <div className="font-bold">FEAR AND GREED INDEX</div>
             </Link>
             
-            <div className="bg-white text-black p-4 text-center border-2 border-black hover:bg-white hover:text-black transition-colors duration-300">
+            <Link to="/synthetic-data-audit" className="block bg-white text-black p-4 text-center border-2 border-black hover:bg-black hover:text-white transition-colors duration-300">
               <div className="font-bold">SYNTHETIC TXT DATA AUDIT</div>
-            </div>
+            </Link>
           </motion.div>
         </CollapsibleContent>
       </Collapsible>

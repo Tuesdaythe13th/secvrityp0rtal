@@ -1,7 +1,6 @@
-
 import { useEffect } from "react";
 import { Link } from "react-router-dom";
-import { motion } from "framer-motion";
+import { ArrowLeft } from "lucide-react";
 
 const SecurityAudit = () => {
   useEffect(() => {
@@ -488,19 +487,14 @@ const SecurityAudit = () => {
       <div id="blood-drops"></div>
 
       {/* Back Button */}
-      <motion.div 
-        className="fixed top-4 left-4 z-50"
-        initial={{ opacity: 0, y: -20 }}
-        animate={{ opacity: 1, y: 0 }}
-        transition={{ duration: 0.5 }}
-      >
+      <div className="fixed top-4 left-4 z-50">
         <Link
           to="/"
-          className="brutal-btn px-4 py-2 bg-black text-white font-bold border-2 border-white hover:bg-red-600 hover:border-red-600 transition-colors"
+          className="back-button flex items-center gap-2"
         >
-          ← BACK
+          <ArrowLeft className="h-4 w-4" /> BACK
         </Link>
-      </motion.div>
+      </div>
 
       <header className="container mx-auto px-4 py-8 border-b-4 border-red-600">
         <div className="flex justify-between items-center">
