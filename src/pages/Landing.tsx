@@ -1,3 +1,4 @@
+
 import { motion } from 'framer-motion';
 import { Link } from 'react-router-dom';
 import { useToast } from '@/hooks/use-toast';
@@ -336,7 +337,7 @@ const Landing = () => {
               whileHover={{ scale: 1.05, backgroundColor: "#ff0044" }}
               whileTap={{ scale: 0.95 }}
             >
-              <Link to="/">ENTER BATTLE DOME</Link>
+              <Link to="/simulator">ENTER BATTLE DOME</Link>
             </motion.button>
             
             <motion.button
@@ -345,6 +346,47 @@ const Landing = () => {
               whileTap={{ scale: 0.95 }}
             >
               VIEW DOCUMENTATION
+            </motion.button>
+          </div>
+        </motion.div>
+        
+        {/* New Neon Crypto Heist Section */}
+        <motion.div 
+          variants={itemVariants}
+          className="border border-cyan-500 bg-black bg-opacity-80 p-6 mb-8"
+          style={{ 
+            boxShadow: '0 0 10px #00f0ff, inset 0 0 10px #00f0ff' 
+          }}
+        >
+          <motion.h3 
+            className="text-2xl mb-2"
+            style={{ 
+              color: '#00f0ff', 
+              textShadow: '0 0 5px #00f0ff, 0 0 10px #00f0ff' 
+            }}
+          >
+            NEON CRYPTO HEIST
+          </motion.h3>
+          <p className="text-gray-300 mb-4">CYBERPUNK CRYPTO HACKING SIMULATION. BREAK INTO THE QUANTUM VAULT.</p>
+          
+          <div className="flex flex-col sm:flex-row gap-4">
+            <motion.button
+              className="bg-cyan-600 text-white px-8 py-3 font-bold"
+              whileHover={{ scale: 1.05, backgroundColor: "#00b8d4" }}
+              whileTap={{ scale: 0.95 }}
+              style={{ 
+                boxShadow: '0 0 15px #00f0ff' 
+              }}
+            >
+              <Link to="/neon-crypto-heist">ENTER CRYPTO HEIST</Link>
+            </motion.button>
+            
+            <motion.button
+              className="border border-cyan-500 text-cyan-500 px-8 py-3 font-bold"
+              whileHover={{ scale: 1.05 }}
+              whileTap={{ scale: 0.95 }}
+            >
+              VIEW LOOT STATS
             </motion.button>
           </div>
         </motion.div>
