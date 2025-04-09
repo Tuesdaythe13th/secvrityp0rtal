@@ -19,6 +19,7 @@ import CriticalAISecurityGuide from "./pages/CriticalAISecurityGuide";
 import InsiderTaxonomy from "./pages/InsiderTaxonomy";
 import AdversarialTaxonomy from "./pages/AdversarialTaxonomy";
 import D3fendGraph from "./pages/D3fendGraph";
+import GlitchCrypt from "./pages/GlitchCrypt";
 
 // Create a new QueryClient instance
 const queryClient = new QueryClient();
@@ -45,6 +46,7 @@ const App = () => {
           <Route path="/insider-taxonomy" element={<InsiderTaxonomy />} />
           <Route path="/adversarial-taxonomy" element={<AdversarialTaxonomy />} />
           <Route path="/d3fend-graph" element={<D3fendGraph />} />
+          <Route path="/glitch-crypt" element={<GlitchCrypt />} />
           {/* ADD ALL CUSTOM ROUTES ABOVE THE CATCH-ALL "*" ROUTE */}
           <Route path="*" element={<NotFound />} />
         </Routes>

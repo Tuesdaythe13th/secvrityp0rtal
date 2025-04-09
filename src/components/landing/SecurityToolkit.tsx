@@ -151,6 +151,10 @@ const SecurityToolkit = ({ isExpanded, setIsExpanded }: SecurityToolkitProps) =>
             <Link to="/synthetic-data-audit" className="block bg-white text-black p-4 text-center border-2 border-black hover:bg-black hover:text-white transition-colors duration-300">
               <div className="font-bold">SYNTHETIC TXT DATA AUDIT</div>
             </Link>
+
+            <Link to="/glitch-crypt" className="block bg-black text-white p-4 text-center border-2 border-black hover:bg-white hover:text-black transition-colors duration-300">
+              <div className="font-bold">GLITCH CRYPT</div>
+            </Link>
           </motion.div>
         </CollapsibleContent>
       </Collapsible>
