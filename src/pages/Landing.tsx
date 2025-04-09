@@ -1,8 +1,7 @@
-
 import { motion } from "framer-motion";
 import { Link } from "react-router-dom";
 import { Button } from "@/components/ui/button";
-import { useEffect, useState } from "react";
+import { useEffect, useState, useRef } from "react";
 import { useToast } from "@/components/ui/use-toast";
 import { FontAwesomeIcon } from "@fortawesome/react-fontawesome";
 import { ChevronDown, ChevronUp } from "lucide-react";
@@ -37,8 +36,8 @@ const Landing = () => {
   const { toast } = useToast();
   const [isExpanded, setIsExpanded] = useState(true);
   const [glitchText, setGlitchText] = useState("SECVRITY.BRVTALISM");
+  const rssTickerRef = useRef<HTMLDivElement>(null);
 
-  // Glitch effect for text
   useEffect(() => {
     const intervalId = setInterval(() => {
       if (Math.random() > 0.8) {
@@ -53,7 +52,6 @@ const Landing = () => {
           .join('');
         setGlitchText(corruptedText);
         
-        // Reset back to original text after a short delay
         setTimeout(() => {
           setGlitchText("SECVRITY.BRVTALISM");
         }, 200);
@@ -82,7 +80,6 @@ const Landing = () => {
 
     const timer = setInterval(() => {
       setCurrentTime(new Date());
-      // Simulate changing threat counts
       setThreatCount(prev => prev + Math.floor(Math.random() * 10 - 5));
     }, 5000);
 
@@ -96,11 +93,32 @@ const Landing = () => {
     };
   }, [toast]);
 
+  useEffect(() => {
+    if (rssTickerRef.current) {
+      rssTickerRef.current.innerHTML = '';
+      
+      const script = document.createElement('script');
+      script.src = 'https://widget.rss.app/v1/ticker.js';
+      script.async = true;
+      document.head.appendChild(script);
+      
+      const widget = document.createElement('rssapp-ticker');
+      widget.setAttribute('url', 'https://rss.app');
+      widget.setAttribute('id', 'tccUCm0DWwfoAHE1');
+      widget.setAttribute('nofollow', 'true');
+      rssTickerRef.current.appendChild(widget);
+    }
+    
+    return () => {
+      const scripts = document.querySelectorAll('script[src="https://widget.rss.app/v1/ticker.js"]');
+      scripts.forEach(script => script.remove());
+    };
+  }, []);
+
   return (
     <div className="bg-white text-black min-h-screen">
       <header className="text-center py-6 border-b-4 border-black">
         <div className="flex flex-col items-center justify-center">
-          {/* ARTIFEX LABS Logo */}
           <motion.div
             className="mb-2"
             initial={{ opacity: 0 }}
@@ -114,7 +132,6 @@ const Landing = () => {
             />
           </motion.div>
           
-          {/* Glitchy Title */}
           <motion.h1
             className="text-5xl font-bold text-black relative"
             initial={{ y: -20 }}
@@ -152,7 +169,6 @@ const Landing = () => {
               {glitchText}
             </motion.span>
             
-            {/* Main visible text */}
             {glitchText}
           </motion.h1>
         </div>
@@ -197,10 +213,8 @@ const Landing = () => {
         </div>
 
         <div className="border-2 border-black p-2 mb-4 overflow-hidden">
-          <div className="whitespace-nowrap animate-marquee">
-            <span className="inline-block mx-4 text-black font-bold">CONFERENCES</span>
-            <span className="inline-block mx-4 text-black">CYBERSECURITY EXPERTS WEIGH IN ON CRUCIAL PROTECTIONS FOR BUSINESSES</span>
-            <span className="inline-block mx-4 text-red-600 font-bold">NEW TCSB MALWARE FOUND IN SYSTEMS</span>
+          <div ref={rssTickerRef} className="w-full">
+            {/* RSS widget will be inserted here */}
           </div>
         </div>
 
@@ -295,7 +309,7 @@ const Landing = () => {
                 <div className="font-bold">INSIDER THREAT</div>
               </div>
               
-              <div className="bg-white text-black p-4 text-center border-2 border-black hover:bg-black hover:text-white transition-colors duration-300">
+              <div className="bg-white text-black p-4 text-center border-2 border-black hover:bg-white hover:text-black transition-colors duration-300">
                 <div className="font-bold">CLOUD SECURITY</div>
               </div>
               
@@ -303,7 +317,7 @@ const Landing = () => {
                 <div className="font-bold">SECURITY AUDIT</div>
               </div>
               
-              <div className="bg-white text-black p-4 text-center border-2 border-black hover:bg-white hover:text-black transition-colors duration-300">
+              <div className="bg-black text-white p-4 text-center border-2 border-black hover:bg-white hover:text-black transition-colors duration-300">
                 <div className="font-bold">AGENT ARCHITECTURE</div>
               </div>
               
@@ -319,7 +333,7 @@ const Landing = () => {
                 <div className="font-bold">VULNERABILITY DATABASE</div>
               </div>
               
-              <div className="bg-white text-black p-4 text-center border-2 border-black hover:bg-black hover:text-white transition-colors duration-300">
+              <div className="bg-white text-black p-4 text-center border-2 border-black hover:bg-white hover:text-black transition-colors duration-300">
                 <div className="font-bold">SECURE CONFERENCE</div>
               </div>
               
