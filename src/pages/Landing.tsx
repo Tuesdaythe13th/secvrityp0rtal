@@ -1,507 +1,388 @@
-import { motion } from 'framer-motion';
-import { Link, useNavigate } from 'react-router-dom';
-import { useToast } from '@/hooks/use-toast';
+import { motion } from "framer-motion";
+import { Link } from "react-router-dom";
+import { Button } from "@/components/ui/button";
+import {
+  Card,
+  CardContent,
+  CardDescription,
+  CardFooter,
+  CardHeader,
+  CardTitle,
+} from "@/components/ui/card";
+import { Input } from "@/components/ui/input";
+import { Label } from "@/components/ui/label";
+import {
+  Select,
+  SelectContent,
+  SelectItem,
+  SelectTrigger,
+  SelectValue,
+} from "@/components/ui/select";
+import {
+  Tooltip,
+  TooltipContent,
+  TooltipProvider,
+  TooltipTrigger,
+} from "@/components/ui/tooltip";
+import { useEffect, useState } from "react";
+import { useToast } from "@/components/ui/use-toast";
+import {
+  HoverCard,
+  HoverCardContent,
+  HoverCardTrigger,
+} from "@/components/ui/hover-card";
+import {
+  AlertDialog,
+  AlertDialogAction,
+  AlertDialogCancel,
+  AlertDialogContent,
+  AlertDialogDescription,
+  AlertDialogFooter,
+  AlertDialogHeader,
+  AlertDialogTitle,
+  AlertDialogTrigger,
+} from "@/components/ui/alert-dialog";
+import {
+  ContextMenu,
+  ContextMenuContent,
+  ContextMenuItem,
+  ContextMenuTrigger,
+} from "@/components/ui/context-menu";
+import { Progress } from "@/components/ui/progress";
+import { Separator } from "@/components/ui/separator";
+import { Badge } from "@/components/ui/badge";
+import { Skeleton } from "@/components/ui/skeleton";
+import { Switch } from "@/components/ui/switch";
+import { Textarea } from "@/components/ui/textarea";
+import { Command, CommandEmpty, CommandGroup, CommandInput, CommandItem, CommandList, CommandSeparator, CommandShortcut } from "@/components/ui/command";
+import { Dialog, DialogContent, DialogDescription, DialogHeader, DialogTitle, DialogTrigger } from "@/components/ui/dialog";
+import {
+  Drawer,
+  DrawerClose,
+  DrawerContent,
+  DrawerDescription,
+  DrawerFooter,
+  DrawerHeader,
+  DrawerTitle,
+  DrawerTrigger,
+} from "@/components/ui/drawer"
+import {
+  DropdownMenu,
+  DropdownMenuCheckboxItem,
+  DropdownMenuContent,
+  DropdownMenuItem,
+  DropdownMenuLabel,
+  DropdownMenuRadioGroup,
+  DropdownMenuRadioItem,
+  DropdownMenuSeparator,
+  DropdownMenuShortcut,
+  DropdownMenuSub,
+  DropdownMenuSubContent,
+  DropdownMenuSubTrigger,
+  DropdownMenuTrigger,
+} from "@/components/ui/dropdown-menu"
+import { FontAwesomeIcon } from "@fortawesome/react-fontawesome";
+import { faGithub } from "@fortawesome/free-brands-svg-icons";
 
-const Landing = () => {
+const glitchVariants = {
+  initial: { opacity: 0 },
+  animate: { 
+    opacity: [0, 1, 0.5, 1], 
+    skew: [0, -5, 5, 0], 
+    scale: [1, 1.02, 0.98, 1],
+    transition: { 
+      duration: 0.5, 
+      repeat: Infinity, 
+      repeatType: "mirror" as const
+    }
+  }
+};
+
+const glitchTextVariants = {
+  initial: { opacity: 0 },
+  animate: {
+    opacity: [0, 1, 0.8, 1],
+    x: [0, -2, 2, 0],
+    transition: {
+      duration: 0.3,
+      repeat: Infinity,
+      repeatType: "mirror" as const
+    }
+  }
+};
+
+const scanlineVariants = {
+  initial: { opacity: 0 },
+  animate: {
+    opacity: 0.2,
+    transition: {
+      duration: 1.5,
+      repeat: Infinity,
+      repeatType: "mirror" as const
+    }
+  }
+};
+
+export default function Landing() {
+  const [isOnline, setIsOnline] = useState(navigator.onLine);
   const { toast } = useToast();
-  const navigate = useNavigate();
 
-  const containerVariants = {
-    hidden: { opacity: 0 },
-    visible: { 
-      opacity: 1,
-      transition: { 
-        staggerChildren: 0.2,
-        delayChildren: 0.3
+  useEffect(() => {
+    const handleOnlineStatus = () => {
+      setIsOnline(navigator.onLine);
+      if (navigator.onLine) {
+        toast({
+          title: "Back Online",
+          description: "Connection restored.",
+        });
+      } else {
+        toast({
+          title: "Offline",
+          description: "No internet connection.",
+          variant: "destructive",
+        });
       }
-    }
-  };
+    };
 
-  const itemVariants = {
-    hidden: { y: 20, opacity: 0 },
-    visible: { 
-      y: 0, 
-      opacity: 1,
-      transition: { 
-        type: "spring", 
-        stiffness: 100,
-        damping: 10
-      }
-    }
-  };
+    window.addEventListener("online", handleOnlineStatus);
+    window.addEventListener("offline", handleOnlineStatus);
 
-  const logoVariants = {
-    hidden: { scale: 0.8, opacity: 0 },
-    visible: { 
-      scale: 1, 
-      opacity: 1,
-      transition: { 
-        type: "spring", 
-        stiffness: 100,
-        delay: 0.2
-      }
-    }
-  };
-
-  const glitchTextVariants = {
-    initial: { opacity: 1 },
-    animate: { 
-      opacity: [1, 0.8, 1, 0.9, 1],
-      x: [0, -2, 3, -1, 0],
-      transition: { 
-        duration: 0.5,
-        repeat: Infinity,
-        repeatType: "mirror" 
-      }
-    }
-  };
-
-  const glitchLogoVariants = {
-    initial: { opacity: 1 },
-    animate: { 
-      opacity: [1, 0.9, 1, 0.95, 1],
-      skew: [0, 1, -1, 0.5, 0],
-      scale: [1, 1.01, 0.99, 1.005, 1],
-      transition: { 
-        duration: 3,
-        repeat: Infinity,
-        repeatType: "mirror" 
-      }
-    }
-  };
-
-  const pulseVariants = {
-    initial: { opacity: 0.6 },
-    animate: { 
-      opacity: 1,
-      transition: { 
-        duration: 2,
-        repeat: Infinity,
-        repeatType: "reverse" 
-      }
-    }
-  };
-
-  const threatTypes = [
-    "MALWARE", "PHISHING", "SPAM", "EXPLOITS", "BOTNETS", "DDOS"
-  ];
-
-  const securityModules = [
-    { title: "CRITICAL AI SECURITY", category: "critical" },
-    { title: "AI ATTACK TAXONOMY", category: "critical" },
-    { title: "D3FEND GRAPH", category: "warning" },
-    { title: "VDP GENERATOR", category: "standard" },
-    { title: "INSIDER THREAT", category: "standard" },
-    { title: "CLOUD SECURITY", category: "info" },
-    { title: "SECURITY AUDIT", category: "standard" },
-    { title: "AGENT ARCHITECTURE", category: "standard" },
-    { title: "AGENTIC 101", category: "caution", route: "/agentic-ai-101" },
-    { title: "BENCHMARK DIRECTORY", category: "standard" },
-    { title: "VULNERABILITY DATABASE", category: "critical" },
-    { title: "SECURE CONFERENCE", category: "success" },
-    { title: "FEAR AND GREED INDEX", category: "warning", route: "/fear-greed-index" },
-    { title: "SYNTHETIC TXT DATA AUDIT", category: "standard" }
-  ];
-
-  const moduleColors = {
-    critical: "bg-red-500",
-    warning: "bg-yellow-500",
-    standard: "bg-white",
-    info: "bg-blue-500",
-    caution: "bg-orange-400",
-    success: "bg-green-500"
-  };
-
-  const moduleVariants = {
-    hidden: { opacity: 0, y: 20 },
-    visible: {
-      opacity: 1,
-      y: 0,
-      transition: {
-        type: "spring",
-        stiffness: 100,
-        damping: 10
-      }
-    },
-    hover: {
-      scale: 1.05,
-      y: -5,
-      transition: {
-        type: "spring",
-        stiffness: 400,
-        damping: 10
-      }
-    }
-  };
-
-  const moduleFrameVariants = {
-    hidden: { opacity: 0, height: "0px" },
-    visible: {
-      opacity: 1,
-      height: "auto",
-      transition: {
-        duration: 0.5,
-        ease: "easeInOut"
-      }
-    }
-  };
-
-  const moduleLinkVariants = {
-    hidden: { opacity: 0, x: -20 },
-    visible: {
-      opacity: 1,
-      x: 0,
-      transition: {
-        delay: 0.2,
-        type: "spring",
-        stiffness: 100,
-        damping: 10
-      }
-    }
-  };
-
-  const handleModuleClick = (title: string, route?: string) => {
-    if (route) {
-      navigate(route);
-    } else {
-      toast({
-        title: `Module Selected: ${title}`,
-        description: "Loading security module...",
-        variant: "destructive",
-      });
-    }
-  };
+    return () => {
+      window.removeEventListener("online", handleOnlineStatus);
+      window.removeEventListener("offline", handleOnlineStatus);
+    };
+  }, [toast]);
 
   return (
-    <div className="relative min-h-screen bg-white text-black">
-      <div className="scanline"></div>
-      
-      <motion.div 
-        className="container mx-auto px-4 py-12"
-        variants={containerVariants}
-        initial="hidden"
-        animate="visible"
-      >
-        <motion.div 
-          variants={logoVariants} 
-          className="flex flex-col items-center justify-center mb-8"
+    <div className="bg-white text-black">
+      <div className="container mx-auto p-4 max-w-6xl">
+        <motion.header
+          className="brutal-border bg-white mb-8 p-6"
+          initial={{ opacity: 0, y: 20 }}
+          animate={{ opacity: 1, y: 0 }}
+          transition={{ duration: 0.5 }}
         >
-          <motion.div
-            variants={glitchLogoVariants}
-            initial="initial"
-            animate="animate"
-            className="relative overflow-hidden"
-          >
-            <img 
-              src="/lovable-uploads/f4cc2880-2437-4c3c-81ae-3821a31d6e66.png" 
-              alt="Artifex Labs Logo" 
-              className="w-[80%] max-w-[700px] mb-4"
-            />
-            <motion.div
-              className="absolute inset-0 bg-red-600 mix-blend-screen opacity-10"
-              animate={{
-                opacity: [0.05, 0.1, 0.05],
-                x: [-5, 0, 5, 0, -5],
-              }}
-              transition={{
-                duration: 5,
-                repeat: Infinity,
-                repeatType: "mirror",
-              }}
-            />
-          </motion.div>
-          
-          <motion.h2 
-            variants={glitchTextVariants}
-            initial="initial"
-            animate="animate"
-            className="text-5xl md:text-7xl font-bold mt-4 mb-8 text-center monospace"
-            style={{ 
-              color: '#ff0000', 
-              textShadow: '2px 2px 0px #000, -2px -2px 0px #000, 3px 0px 0px #000'
-            }}
-          >
-            SECVRITY.BRVTALISM
-          </motion.h2>
-        </motion.div>
+          <div className="border-b-2 border-black pb-4 mb-4">
+            <h1 className="text-4xl md:text-5xl font-bold text-black uppercase monospace">
+              CYBERPUNK RED TEAM SIM
+            </h1>
+            <p className="text-gray-700 monospace text-sm mt-2">
+              Brutalist Red Teaming Platform | Status:{" "}
+              {isOnline ? "Online" : "Offline"}
+            </p>
+          </div>
 
-        <motion.div variants={itemVariants} className="flex justify-center space-x-4 md:space-x-8 text-xs md:text-base mb-12">
-          {['HOME', 'PUBLICATIONS', 'UPCOMING', 'SUBSTACK', 'RESOURCES', 'SIGN UP'].map((item) => (
-            <motion.button
-              key={item}
-              className="hover:text-neonRed transition-colors"
-              whileHover={{ scale: 1.05 }}
-              whileTap={{ scale: 0.95 }}
-            >
-              {item}
-            </motion.button>
-          ))}
-        </motion.div>
-        
-        <motion.div variants={itemVariants} className="neon-border border-red-600 bg-black bg-opacity-80 p-4 mb-8">
-          <div className="flex justify-between items-center mb-2">
-            <motion.h3 variants={pulseVariants} initial="initial" animate="animate" className="text-red-500 font-bold">
-              LIVE SECURITY THREAT MONITOR
-            </motion.h3>
-            <div className="flex items-center">
-              <span className="text-red-500 mr-2">LIVE</span>
-              <motion.div 
-                className="w-2 h-2 bg-red-500 rounded-full"
-                animate={{ 
-                  opacity: [0.5, 1, 0.5],
-                  scale: [1, 1.2, 1]
-                }}
-                transition={{ 
-                  duration: 2,
-                  repeat: Infinity
-                }}
-              />
+          <div className="flex flex-wrap gap-4">
+            <div className="flex items-center gap-2 bg-black text-white px-3 py-1">
+              <span className="monospace text-sm font-bold">
+                AI-POWERED
+              </span>
+            </div>
+            <div className="flex items-center gap-2 bg-black text-white px-3 py-1">
+              <span className="monospace text-sm font-bold">
+                RED TEAM FOCUS
+              </span>
+            </div>
+            <div className="flex items-center gap-2 bg-red-600 text-white px-3 py-1">
+              <span className="monospace text-sm font-bold">
+                UNDER DEVELOPMENT
+              </span>
             </div>
           </div>
-          
-          <div className="grid grid-cols-1 md:grid-cols-3 gap-2 mb-4">
-            <div className="border border-red-500 p-2">
-              <div className="text-xs text-gray-400">THREATS</div>
-              <div className="text-red-500 text-xl">24,687</div>
-            </div>
-            <div className="border border-red-500 p-2">
-              <div className="text-xs text-gray-400">COUNTRIES</div>
-              <div className="text-red-500 text-xl">187</div>
-            </div>
-            <div className="border border-red-500 p-2">
-              <div className="text-xs text-gray-400">LAST UPDATE</div>
-              <div className="text-red-500 text-xl">4:01:09 AM</div>
-            </div>
-          </div>
-          
-          <div className="mb-4 bg-gray-900 p-2 border border-gray-700 overflow-hidden">
-            <div className="relative" style={{ height: "30px" }}>
-              <div style={{ position: "relative", width: "100%", height: "100%" }}>
-                <iframe
-                  src="https://rss.app/embed/v1/ticker/tccUCm0DWwfoAHE1"
-                  frameBorder="0"
-                  style={{ position: "absolute", top: 0, left: 0, width: "100%", height: "100%", border: 0 }}
-                ></iframe>
-              </div>
-            </div>
-          </div>
-          
-          <div className="mb-4">
-            <h4 className="text-red-500 mb-2">GLOBAL CYBER THREAT MAP</h4>
-            <div className="border border-gray-700 p-1 h-[200px] bg-gray-900 flex items-center justify-center relative overflow-hidden">
-              <iframe 
-                src="https://cybermap.kaspersky.com/en/widget/dynamic/dark" 
-                width="100%" 
-                height="100%" 
-                title="Kaspersky Cyber Map" 
-                frameBorder="0"
-                className="z-10"
-              />
-              <motion.div 
-                className="absolute inset-0 bg-green-500 opacity-5 pointer-events-none z-20"
-                animate={{ 
-                  opacity: [0.03, 0.07, 0.03]
-                }}
-                transition={{ 
-                  duration: 2,
-                  repeat: Infinity
-                }}
-              />
-            </div>
-          </div>
-          
-          <div className="flex justify-between text-xs">
-            <div className="text-red-500">SYSTEM STATUS: OPERATIONAL</div>
-            <div className="text-red-500">ACCESS: PUBLIC</div>
-            <div className="text-red-500">SECURITY LEVEL: MAXIMUM</div>
-          </div>
-        </motion.div>
-        
-        <motion.div variants={itemVariants} className="border border-red-600 bg-black bg-opacity-80 p-4 mb-8">
-          <div className="grid grid-cols-2 md:grid-cols-6 gap-2">
-            {threatTypes.map((type) => (
-              <motion.button
-                key={type}
-                className="border border-red-500 p-2 text-red-500 text-xs hover:bg-red-900 transition-colors"
+        </motion.header>
+
+        <section className="mb-8">
+          <h2 className="text-2xl font-bold mb-4 monospace">
+            Core Simulators
+          </h2>
+
+          <div className="grid grid-cols-1 md:grid-cols-2 lg:grid-cols-3 gap-4">
+            <Link to="/simulator">
+              <motion.div
+                className="brutal-border bg-white p-4 hover:bg-gray-100 transition-colors duration-200"
                 whileHover={{ scale: 1.05 }}
                 whileTap={{ scale: 0.95 }}
               >
-                <div className="text-gray-400">THREAT TYPE</div>
-                {type}
-              </motion.button>
-            ))}
-          </div>
-        </motion.div>
-        
-        <motion.div 
-          variants={itemVariants} 
-          className="grid grid-cols-1 sm:grid-cols-2 md:grid-cols-4 gap-4 mb-12"
-        >
-          {securityModules.map((module, index) => (
-            <motion.div key={module.title} className="flex flex-col">
-              <motion.button
-                className={`p-4 text-black font-bold text-center ${moduleColors[module.category as keyof typeof moduleColors]}`}
-                variants={moduleVariants}
-                initial="hidden"
-                animate="visible"
-                whileHover="hover"
-                whileTap={{ scale: 0.98 }}
-                onClick={() => handleModuleClick(module.title, module.route)}
-              >
-                {module.title}
-              </motion.button>
-              
-              <motion.div
-                className="overflow-hidden"
-                variants={moduleFrameVariants}
-                initial="hidden"
-                whileHover="visible"
-              >
-                <motion.div 
-                  className="bg-black bg-opacity-90 border border-red-600 p-2 text-center"
-                  variants={moduleLinkVariants}
-                >
-                  {module.title === "AGENTIC 101" ? (
-                    <Link 
-                      to="/agentic-ai-101" 
-                      className="text-red-500 text-xs hover:text-white"
-                    >
-                      ENTER MODULE
-                    </Link>
-                  ) : (
-                    <Link 
-                      to="/" 
-                      className="text-red-500 text-xs hover:text-white"
-                    >
-                      ENTER MODULE
-                    </Link>
-                  )}
-                </motion.div>
+                <h3 className="text-xl font-bold mb-2 monospace">
+                  Main Simulator
+                </h3>
+                <p className="text-gray-700 monospace">
+                  Core red teaming simulation environment.
+                </p>
               </motion.div>
+            </Link>
+
+            <Link to="/neon-crypto-heist">
+              <motion.div
+                className="brutal-border bg-white p-4 hover:bg-gray-100 transition-colors duration-200"
+                whileHover={{ scale: 1.05 }}
+                whileTap={{ scale: 0.95 }}
+              >
+                <h3 className="text-xl font-bold mb-2 monospace">
+                  Neon Crypto-Heist
+                </h3>
+                <p className="text-gray-700 monospace">
+                  Scenario-based crypto hacking simulation.
+                </p>
+              </motion.div>
+            </Link>
+
+            <Link to="/prompt-injection-dojo">
+              <motion.div
+                className="brutal-border bg-white p-4 hover:bg-gray-100 transition-colors duration-200"
+                whileHover={{ scale: 1.05 }}
+                whileTap={{ scale: 0.95 }}
+              >
+                <h3 className="text-xl font-bold mb-2 monospace">
+                  Prompt Injection Dojo
+                </h3>
+                <p className="text-gray-700 monospace">
+                  Test and refine your prompt injection skills.
+                </p>
+              </motion.div>
+            </Link>
+
+            <Link to="/agentic-ai-101">
+              <motion.div
+                className="brutal-border bg-white p-4 hover:bg-gray-100 transition-colors duration-200"
+                whileHover={{ scale: 1.05 }}
+                whileTap={{ scale: 0.95 }}
+              >
+                <h3 className="text-xl font-bold mb-2 monospace">
+                  Agentic AI 101
+                </h3>
+                <p className="text-gray-700 monospace">
+                  Learn about agentic AI and how to defend against it.
+                </p>
+              </motion.div>
+            </Link>
+
+            <Link to="/fear-greed-index">
+              <motion.div
+                className="brutal-border bg-white p-4 hover:bg-gray-100 transition-colors duration-200"
+                whileHover={{ scale: 1.05 }}
+                whileTap={{ scale: 0.95 }}
+              >
+                <h3 className="text-xl font-bold mb-2 monospace">
+                  Crypto Fear/Greed Index
+                </h3>
+                <p className="text-gray-700 monospace">
+                  Real-time market sentiment analysis.
+                </p>
+              </motion.div>
+            </Link>
+          </div>
+        </section>
+
+        <section className="mb-8">
+          <h2 className="text-2xl font-bold mb-4 monospace">
+            AI-Enhanced Features
+          </h2>
+
+          <div className="grid grid-cols-1 md:grid-cols-2 gap-4">
+            <motion.div
+              className="brutal-border bg-black text-white p-4"
+              variants={glitchVariants}
+              initial="initial"
+              animate="animate"
+            >
+              <h3 className="text-xl font-bold mb-2 monospace">
+                <motion.span
+                  className="inline-block"
+                  variants={glitchTextVariants}
+                >
+                  AI-Powered Threat Intel
+                </motion.span>
+              </h3>
+              <p className="text-gray-300 monospace">
+                Real-time threat intelligence reports generated by AI.
+              </p>
+              <motion.div
+                className="scanline"
+                variants={scanlineVariants}
+                initial="initial"
+                animate="animate"
+              />
             </motion.div>
-          ))}
-        </motion.div>
-        
-        <motion.div 
-          variants={itemVariants}
-          className="border border-red-600 bg-black bg-opacity-80 p-6 mb-8"
-        >
-          <motion.h3 
-            className="text-2xl mb-2"
-            style={{ 
-              color: '#0f0', 
-              textShadow: '0 0 5px #0f0, 0 0 10px #0f0' 
-            }}
-          >
-            RED TEAM MINI BATTLE DOME
-          </motion.h3>
-          <p className="text-gray-300 mb-4">INTERACTIVE AI SECURITY TESTING SIMULATOR. BREAK THROUGH AI SAFETY SYSTEMS.</p>
-          
-          <div className="flex flex-col sm:flex-row gap-4">
-            <motion.button
-              className="bg-red-600 text-white px-8 py-3 font-bold"
-              whileHover={{ scale: 1.05, backgroundColor: "#ff0044" }}
-              whileTap={{ scale: 0.95 }}
+
+            <motion.div
+              className="brutal-border bg-black text-white p-4"
+              variants={glitchVariants}
+              initial="initial"
+              animate="animate"
             >
-              <Link to="/simulator">ENTER BATTLE DOME</Link>
-            </motion.button>
-            
-            <motion.button
-              className="border border-red-600 text-red-600 px-8 py-3 font-bold"
-              whileHover={{ scale: 1.05 }}
-              whileTap={{ scale: 0.95 }}
-            >
-              VIEW DOCUMENTATION
-            </motion.button>
+              <h3 className="text-xl font-bold mb-2 monospace">
+                <motion.span
+                  className="inline-block"
+                  variants={glitchTextVariants}
+                >
+                  Automated Exploit Analysis
+                </motion.span>
+              </h3>
+              <p className="text-gray-300 monospace">
+                AI analyzes exploits and provides actionable insights.
+              </p>
+              <motion.div
+                className="scanline"
+                variants={scanlineVariants}
+                initial="initial"
+                animate="animate"
+              />
+            </motion.div>
           </div>
-        </motion.div>
-        
-        <motion.div 
-          variants={itemVariants}
-          className="border border-cyan-500 bg-black bg-opacity-80 p-6 mb-8"
-          style={{ 
-            boxShadow: '0 0 10px #00f0ff, inset 0 0 10px #00f0ff' 
-          }}
-        >
-          <motion.h3 
-            className="text-2xl mb-2"
-            style={{ 
-              color: '#00f0ff', 
-              textShadow: '0 0 5px #00f0ff, 0 0 10px #00f0ff' 
-            }}
-          >
-            NEON CRYPTO HEIST
-          </motion.h3>
-          <p className="text-gray-300 mb-4">CYBERPUNK CRYPTO HACKING SIMULATION. BREAK INTO THE QUANTUM VAULT.</p>
-          
-          <div className="flex flex-col sm:flex-row gap-4">
-            <motion.button
-              className="bg-cyan-600 text-white px-8 py-3 font-bold"
-              whileHover={{ scale: 1.05, backgroundColor: "#00b8d4" }}
-              whileTap={{ scale: 0.95 }}
-              style={{ 
-                boxShadow: '0 0 15px #00f0ff' 
-              }}
-            >
-              <Link to="/neon-crypto-heist">ENTER CRYPTO HEIST</Link>
-            </motion.button>
-            
-            <motion.button
-              className="border border-cyan-500 text-cyan-500 px-8 py-3 font-bold"
-              whileHover={{ scale: 1.05 }}
-              whileTap={{ scale: 0.95 }}
-            >
-              VIEW LOOT STATS
-            </motion.button>
+        </section>
+
+        <section className="mb-8">
+          <h2 className="text-2xl font-bold mb-4 monospace">
+            Community & Support
+          </h2>
+
+          <div className="flex flex-col md:flex-row gap-4">
+            <div className="md:w-1/2">
+              <p className="text-gray-700 monospace mb-4">
+                Join our community to collaborate, share insights, and get
+                support.
+              </p>
+              <Button asChild>
+                <a
+                  href="https://github.com/orgs/lovable-hq/discussions"
+                  target="_blank"
+                  rel="noopener noreferrer"
+                  className="flex items-center gap-2"
+                >
+                  <FontAwesomeIcon icon={faGithub} />
+                  GitHub Discussions
+                </a>
+              </Button>
+            </div>
+
+            <div className="md:w-1/2">
+              <p className="text-gray-700 monospace mb-4">
+                Report issues, suggest features, and contribute to the
+                platform.
+              </p>
+              <Button asChild>
+                <a
+                  href="https://github.com/lovable-hq/cyberpunk-red-team-sim/issues"
+                  target="_blank"
+                  rel="noopener noreferrer"
+                  className="flex items-center gap-2"
+                >
+                  <FontAwesomeIcon icon={faGithub} />
+                  GitHub Issues
+                </a>
+              </Button>
+            </div>
           </div>
-        </motion.div>
-        
-        <motion.div 
-          variants={itemVariants}
-          className="brutal-border bg-black bg-opacity-80 p-6 mb-8"
-          style={{ 
-            borderColor: '#ff5555',
-            boxShadow: '8px 8px 0 #ff0000' 
-          }}
-        >
-          <motion.h3 
-            className="text-2xl mb-2 ibm-font"
-            style={{ 
-              color: '#ff5555', 
-              textShadow: '0 0 5px #ff5555, 0 0 10px #ff5555' 
-            }}
-          >
-            PROMPT INJECTION DOJO
-          </motion.h3>
-          <p className="text-gray-300 mb-4">BRUTAL RED TEAM TRAINING SIMULATOR. BYPASS AI CONTENT FILTERS.</p>
-          
-          <div className="flex flex-col sm:flex-row gap-4">
-            <motion.button
-              className="brutal-btn font-bold"
-              whileHover={{ scale: 1.05, backgroundColor: "#ff0000" }}
-              whileTap={{ scale: 0.95 }}
-            >
-              <Link to="/prompt-injection-dojo">ENTER DOJO</Link>
-            </motion.button>
-            
-            <motion.button
-              className="border border-red-500 text-red-500 px-8 py-3 font-bold"
-              whileHover={{ scale: 1.05 }}
-              whileTap={{ scale: 0.95 }}
-              style={{ borderColor: '#ff5555' }}
-            >
-              ADVANCED TECHNIQUES
-            </motion.button>
-          </div>
-        </motion.div>
-        
-        <motion.footer variants={itemVariants} className="text-center text-xs text-gray-500 mt-12">
-          <p>© 2025 ARTIFEX LABS. ALL RIGHTS RESERVED.</p>
-          <p>BRUTALIST SECURITY INTERFACE DESIGNED FOR MAXIMUM EFFICIENCY.</p>
-        </motion.footer>
-      </motion.div>
+        </section>
+
+        <footer className="text-center text-gray-500 text-sm monospace">
+          <p>
+            &copy; 2024 Lovable. All rights reserved. | Brutalist Cyberpunk
+            Red Teaming Platform
+          </p>
+        </footer>
+      </div>
     </div>
   );
-};
-
-export default Landing;
+}
