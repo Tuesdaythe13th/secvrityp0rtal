@@ -43,14 +43,15 @@ const Landing = () => {
     }
   };
 
+  // Fixed the pulseVariants to use proper Framer Motion typing
   const pulseVariants = {
     initial: { opacity: 0.6 },
     animate: { 
       opacity: 1,
-      transition: {
+      transition: { 
         duration: 2,
         repeat: Infinity,
-        repeatType: "reverse"
+        repeatType: "reverse" as const
       }
     }
   };
@@ -97,7 +98,7 @@ const Landing = () => {
         {/* Artifex Labs Logo */}
         <motion.div variants={logoVariants} className="flex flex-col items-center justify-center mb-8">
           <img 
-            src="/lovable-uploads/1ab52407-0f1e-40ba-8035-d1339efa6867.png" 
+            src="/lovable-uploads/f4cc2880-2437-4c3c-81ae-3821a31d6e66.png" 
             alt="Artifex Labs Logo" 
             className="w-[80%] max-w-[700px] mb-4"
           />
