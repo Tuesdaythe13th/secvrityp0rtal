@@ -2,43 +2,8 @@
 import React, { useState, useRef, useEffect } from "react";
 import { Link } from "react-router-dom";
 import { motion, AnimatePresence } from "framer-motion";
-import { Canvas, useFrame } from "@react-three/fiber";
-import { Text, Box, OrbitControls } from "@react-three/drei";
-import { categories, elements, tableLayout } from "../data/cloud-security-data";
 import "../styles/CloudSecurityTable.css";
-
-// 3D Element Component
-function Element3D({
-  element,
-  isSelected,
-  onClick,
-}: {
-  element: any;
-  isSelected: boolean;
-  onClick: () => void;
-}) {
-  const meshRef = useRef<any>();
-  const category = categories.find((cat) => cat.id === element.category);
-  const color = category?.color || "#ffffff";
-
-  useFrame(() => {
-    if (meshRef.current) {
-      meshRef.current.rotation.y += 0.005;
-      if (isSelected) {
-        meshRef.current.rotation.y += 0.01;
-      }
-    }
-  });
-
-  return (
-    <Box ref={meshRef} args={[1, 1, 0.2]} onClick={onClick} position={[0, 0, 0]}>
-      <meshStandardMaterial attach="material" color={color} />
-      <Text position={[0, 0, 0.11]} fontSize={0.3} color="#000000" anchorX="center" anchorY="middle">
-        {element.symbol}
-      </Text>
-    </Box>
-  );
-}
+import { categories, elements, tableLayout } from "../data/cloud-security-data";
 
 // Element Card Component
 function ElementCard({
@@ -89,7 +54,7 @@ function ElementCard({
 function DetailPanel({ element }: { element: any | null }) {
   if (!element) return null;
 
-  const category = categories.find((cat) => cat.id === element.category);
+  const category = categories.find((cat) => c => c.id === element.category);
 
   return (
     <motion.div
@@ -100,16 +65,9 @@ function DetailPanel({ element }: { element: any | null }) {
       transition={{ duration: 0.4 }}
     >
       <div className="flex items-start gap-4">
-        <div className="relative">
-          <div className="detail-symbol" style={{ backgroundColor: category?.color }}>
-            {element.symbol}
-          </div>
-
-          <Canvas className="absolute top-0 left-0 w-full h-full pointer-events-none opacity-30">
-            <ambientLight intensity={0.5} />
-            <pointLight position={[10, 10, 10]} />
-            <Element3D element={element} isSelected={true} onClick={() => {}} />
-          </Canvas>
+        <div className="element-symbol-large p-6 font-bold text-2xl border-4 border-black"
+          style={{ backgroundColor: category?.color }}>
+          {element.symbol}
         </div>
 
         <div className="flex-1">
@@ -125,7 +83,6 @@ function DetailPanel({ element }: { element: any | null }) {
 export default function CloudSecurityTable() {
   const [selectedCategory, setSelectedCategory] = useState<string | null>(null);
   const [selectedElement, setSelectedElement] = useState<string | null>(null);
-  const [showCanvas, setShowCanvas] = useState(false);
 
   // Get the selected element object
   const selectedElementObj = elements.find((e) => e.id === selectedElement);
@@ -167,9 +124,7 @@ export default function CloudSecurityTable() {
     );
   };
 
-  // Enable 3D canvas after initial render to avoid SSR issues
   useEffect(() => {
-    setShowCanvas(true);
     document.title = "Cloud Security Table - Neural Security";
   }, []);
 
@@ -211,20 +166,6 @@ export default function CloudSecurityTable() {
 
         {/* Main Table */}
         <div className="bg-black p-6 border-4 border-black">
-          {/* 3D Canvas Background */}
-          {showCanvas && (
-            <div className="absolute inset-0 opacity-10 pointer-events-none">
-              <Canvas>
-                <ambientLight intensity={0.5} />
-                <pointLight position={[10, 10, 10]} />
-                <OrbitControls enableZoom={false} enablePan={false} />
-                <Box args={[20, 20, 0.1]} position={[0, 0, -5]}>
-                  <meshStandardMaterial attach="material" color="#333333" />
-                </Box>
-              </Canvas>
-            </div>
-          )}
-
           {/* Main Table Grid */}
           <div className="grid grid-cols-9 gap-2 relative z-10">
             {tableLayout.mainTable.map((row, rowIndex) =>
