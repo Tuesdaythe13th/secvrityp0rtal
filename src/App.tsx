@@ -15,6 +15,7 @@ import SecurityAudit from "./pages/SecurityAudit";
 import SyntheticDataAudit from "./pages/SyntheticDataAudit";
 import VDPGenerator from "./pages/VDPGenerator";
 import CloudSecurityTable from "./pages/CloudSecurityTable";
+import CriticalAISecurityGuide from "./pages/CriticalAISecurityGuide";
 
 // Create a new QueryClient instance
 const queryClient = new QueryClient();
@@ -37,6 +38,7 @@ const App = () => {
           <Route path="/synthetic-data-audit" element={<SyntheticDataAudit />} />
           <Route path="/vdp-generator" element={<VDPGenerator />} />
           <Route path="/cloud-security-table" element={<CloudSecurityTable />} />
+          <Route path="/critical-ai-security" element={<CriticalAISecurityGuide />} />
           {/* ADD ALL CUSTOM ROUTES ABOVE THE CATCH-ALL "*" ROUTE */}
           <Route path="*" element={<NotFound />} />
         </Routes>

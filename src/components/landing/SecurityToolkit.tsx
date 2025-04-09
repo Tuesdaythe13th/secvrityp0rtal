@@ -48,7 +48,7 @@ const SecurityToolkit = ({ isExpanded, setIsExpanded }: SecurityToolkitProps) =>
             transition={{ duration: 0.3, delay: 0.1 }}
             className="grid grid-cols-1 md:grid-cols-2 lg:grid-cols-4 gap-4"
           >
-            <Link to="/simulator" className="block bg-black text-white p-4 text-center border-2 border-black hover:bg-white hover:text-black transition-colors duration-300">
+            <Link to="/critical-ai-security" className="block bg-black text-white p-4 text-center border-2 border-black hover:bg-white hover:text-black transition-colors duration-300">
               <div className="font-bold">CRITICAL AI SECURITY</div>
             </Link>
             
