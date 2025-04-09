@@ -1,3 +1,4 @@
+
 import React, { useEffect } from "react";
 import { Link } from "react-router-dom";
 
@@ -6,7 +7,7 @@ const SyntheticDataAudit = () => {
     document.title = "Synthetic Data Audit - Neural Security";
   }, []);
 
-  const containerStyle = {
+  const containerStyle: React.CSSProperties = {
     maxWidth: "800px",
     margin: "40px auto",
     padding: "20px",
@@ -16,19 +17,19 @@ const SyntheticDataAudit = () => {
     boxShadow: "0 4px 8px rgba(0, 0, 0, 0.1)",
   };
 
-  const titleStyle = {
+  const titleStyle: React.CSSProperties = {
     fontSize: "2.5em",
     fontWeight: "bold",
     marginBottom: "20px",
-    textAlign: "center",
+    textAlign: "center" as const,
     color: "#2d3748",
   };
 
-  const sectionStyle = {
+  const sectionStyle: React.CSSProperties = {
     marginBottom: "30px",
   };
 
-  const sectionTitleStyle = {
+  const sectionTitleStyle: React.CSSProperties = {
     fontSize: "1.8em",
     fontWeight: "bold",
     color: "#4a5568",
@@ -37,32 +38,32 @@ const SyntheticDataAudit = () => {
     paddingBottom: "5px",
   };
 
-  const paragraphStyle = {
+  const paragraphStyle: React.CSSProperties = {
     fontSize: "1.1em",
     lineHeight: "1.6",
     color: "#718096",
   };
 
-  const listStyle = {
+  const listStyle: React.CSSProperties = {
     listStyleType: "disc",
     paddingLeft: "25px",
     color: "#718096",
   };
 
-  const listItemStyle = {
+  const listItemStyle: React.CSSProperties = {
     fontSize: "1.1em",
     lineHeight: "1.6",
     marginBottom: "5px",
   };
 
-  const linkStyle = {
+  const linkStyle: React.CSSProperties = {
     color: "#3182ce",
     textDecoration: "none",
     fontWeight: "bold",
   };
 
-  const footerStyle = {
-    textAlign: "center",
+  const footerStyle: React.CSSProperties = {
+    textAlign: "center" as const,
     marginTop: "50px",
     color: "#a0aec0",
   };
