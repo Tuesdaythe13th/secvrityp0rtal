@@ -1,4 +1,3 @@
-
 import { Toaster } from "@/components/ui/toaster";
 import { Toaster as Sonner } from "@/components/ui/sonner";
 import { QueryClient, QueryClientProvider } from "@tanstack/react-query";
@@ -20,8 +19,8 @@ import InsiderTaxonomy from "./pages/InsiderTaxonomy";
 import AdversarialTaxonomy from "./pages/AdversarialTaxonomy";
 import D3fendGraph from "./pages/D3fendGraph";
 import GlitchCrypt from "./pages/GlitchCrypt";
+import AgentArch from "./pages/AgentArch";
 
-// Create a new QueryClient instance
 const queryClient = new QueryClient();
 
 const App = () => {
@@ -47,7 +46,7 @@ const App = () => {
           <Route path="/adversarial-taxonomy" element={<AdversarialTaxonomy />} />
           <Route path="/d3fend-graph" element={<D3fendGraph />} />
           <Route path="/glitch-crypt" element={<GlitchCrypt />} />
-          {/* ADD ALL CUSTOM ROUTES ABOVE THE CATCH-ALL "*" ROUTE */}
+          <Route path="/agent-arch" element={<AgentArch />} />
           <Route path="*" element={<NotFound />} />
         </Routes>
       </BrowserRouter>

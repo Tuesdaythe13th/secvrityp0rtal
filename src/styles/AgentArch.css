@@ -1,0 +1,115 @@
+
+@import url('https://fonts.googleapis.com/css2?family=Space+Grotesk:wght@300;400;500;600;700&display=swap');
+
+body.agent-arch {
+  font-family: 'Space Grotesk', sans-serif;
+  background-color: white;
+  color: black;
+}
+
+.brutal-border {
+  border: 3px solid black;
+  box-shadow: 8px 8px 0 rgba(0,0,0,0.2);
+}
+
+.brutal-border-thin {
+  border: 2px solid black;
+}
+
+.brutal-btn {
+  background: white;
+  color: black;
+  border: 2px solid black;
+  transition: all 0.3s ease;
+}
+
+.brutal-btn:hover {
+  background: black;
+  color: white;
+  transform: translate(-2px, -2px);
+  box-shadow: 4px 4px 0 red;
+}
+
+.brutal-btn-danger {
+  background: white;
+  color: red;
+  border: 2px solid red;
+}
+
+.brutal-btn-danger:hover {
+  background: red;
+  color: white;
+  box-shadow: 4px 4px 0 black;
+}
+
+.fade-in {
+  animation: fadeIn 0.5s ease-in;
+}
+
+@keyframes fadeIn {
+  from { opacity: 0; transform: translateY(10px); }
+  to { opacity: 1; transform: translateY(0); }
+}
+
+.slide-in {
+  animation: slideIn 0.4s ease-out;
+}
+
+@keyframes slideIn {
+  from { transform: translateX(-20px); opacity: 0; }
+  to { transform: translateX(0); opacity: 1; }
+}
+
+.pulse {
+  animation: pulse 2s infinite;
+}
+
+@keyframes pulse {
+  0% { box-shadow: 0 0 0 0 rgba(255,0,0,0.4); }
+  70% { box-shadow: 0 0 0 10px rgba(255,0,0,0); }
+  100% { box-shadow: 0 0 0 0 rgba(255,0,0,0); }
+}
+
+.tab-active {
+  border-bottom: 3px solid red;
+  font-weight: 600;
+}
+
+.vulnerability-high {
+  background-color: rgba(255, 0, 0, 0.1);
+  border-left: 4px solid red;
+}
+
+.vulnerability-medium {
+  background-color: rgba(255, 165, 0, 0.1);
+  border-left: 4px solid orange;
+}
+
+.vulnerability-low {
+  background-color: rgba(0, 128, 0, 0.1);
+  border-left: 4px solid green;
+}
+
+.component-node {
+  transition: all 0.3s ease;
+}
+
+.component-node:hover {
+  transform: translateY(-3px);
+  box-shadow: 0 4px 0 black;
+}
+
+.connection-line {
+  position: relative;
+}
+
+.connection-line::after {
+  content: "";
+  position: absolute;
+  left: 50%;
+  bottom: -20px;
+  width: 2px;
+  height: 20px;
+  background-color: black;
+  transform: translateX(-50%);
+}
