@@ -1,4 +1,3 @@
-
 import { useEffect, useState } from "react";
 import { useToast } from "@/components/ui/use-toast";
 import Header from "@/components/landing/Header";
@@ -7,6 +6,7 @@ import ThreatTypes from "@/components/landing/ThreatTypes";
 import SecurityToolkit from "@/components/landing/SecurityToolkit";
 import FeaturedSimulator from "@/components/landing/FeaturedSimulator";
 import Footer from "@/components/landing/Footer";
+import AgentArchHomePreview from "@/components/landing/AgentArchHomePreview";
 
 const Landing = () => {
   const [isOnline, setIsOnline] = useState(navigator.onLine);
@@ -58,9 +58,11 @@ const Landing = () => {
         countryCount={countryCount} 
         currentTime={currentTime} 
       />
-      <ThreatTypes />
-      <SecurityToolkit isExpanded={isExpanded} setIsExpanded={setIsExpanded} />
-      
+
+      {/* AGENT ARCH PROMO (preview box) */}
+      <AgentArchHomePreview />
+
+      {/* RED TEAM MINI BATTLE DOME FEATURED SIMULATOR */}
       <FeaturedSimulator 
         title="RED TEAM MINI BATTLE DOME"
         description="INTERACTIVE AI SECURITY TESTING SIMULATOR. BREAK THROUGH AI SAFETY SYSTEMS."
